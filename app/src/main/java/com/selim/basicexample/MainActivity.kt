@@ -22,12 +22,12 @@ class MainActivity : AppCompatActivity() {
         val personList= arrayListOf<Person>()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        var nameTxt:TextView=findViewById(R.id.editTextTextPersonName)
+        var nameText:TextView=findViewById(R.id.editTextTextPersonName)
         var surnameTxt:TextView=findViewById(R.id.editTextTextPersonSurname)
 
         addPerson.setOnClickListener {
-            personList.add(Person(nameTxt.text.toString(),surnameTxt.text.toString()))
-            Toast.makeText(this,nameTxt.text.toString()+" "+surnameTxt.text.toString(),Toast.LENGTH_LONG).show()
+            personList.add(Person(nameText.text.toString(),surnameTxt.text.toString()))
+            Toast.makeText(this,nameText.text.toString()+" "+surnameTxt.text.toString(),Toast.LENGTH_LONG).show()
         }
        listPerson.setOnClickListener {
            val layoutManager=LinearLayoutManager(this)

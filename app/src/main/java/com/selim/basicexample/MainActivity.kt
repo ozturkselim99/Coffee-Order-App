@@ -3,38 +3,47 @@ package com.selim.basicexample
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.person_row.*
-import kotlinx.android.synthetic.main.person_row.view.*
+import kotlinx.android.synthetic.main.coffee_row.*
+
+data class Coffee(var name:String, var image:Int, var fee:String)
 
 class MainActivity : AppCompatActivity() {
-    class Person
-        (
-        var personName:String="",
-        var personSurname:String=""
-    )
 
+    var coffeeList= ArrayList<Coffee>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val personList= arrayListOf<Person>()
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        var nameText:TextView=findViewById(R.id.editTextTextPersonName)
-        var surnameTxt:TextView=findViewById(R.id.editTextTextPersonSurname)
 
-        addPerson.setOnClickListener {
-            personList.add(Person(nameText.text.toString(),surnameTxt.text.toString()))
-            Toast.makeText(this,nameText.text.toString()+" "+surnameTxt.text.toString(),Toast.LENGTH_LONG).show()
-        }
-       listPerson.setOnClickListener {
-           val layoutManager=LinearLayoutManager(this)
-           recyclerView.layoutManager=layoutManager
-           val adapter=Adapter(personList)
-           recyclerView.adapter=adapter
-           Toast.makeText(this,"Listelendi",Toast.LENGTH_LONG).show()
-       }
+        DataSource()
+
+        var adapter = Adapter(coffeeList)
+        recyclerView.adapter = adapter
+
+        var linearLayoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = linearLayoutManager
+
+
     }
+
+    fun DataSource() : ArrayList<Coffee>
+    {
+        var coffeeNames = resources.getStringArray(R.array.CoffeeName)
+        var coffeeImages = arrayOf(R.drawable.latte, R.drawable.macchiato, R.drawable.cappucino, R.drawable.turkish_coffee)
+        var coffeeFees = resources.getStringArray(R.array.CoffeeFee)
+
+        for(i in 0..coffeeImages.size-1)
+        {
+            var addedCoffee = Coffee(coffeeNames[i], coffeeImages[i], coffeeFees[i])
+            coffeeList.add(addedCoffee)
+        }
+        return coffeeList
+    }
+
 }
+
+

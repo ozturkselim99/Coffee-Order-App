@@ -7,55 +7,44 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <EditText
-        android:id="@+id/editTextTextPersonName"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tv_customer_name"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Name"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Ad"
+        android:textSize="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/editTextTextPersonSurname"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="Surname"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
-
-    <Button
-        android:id="@+id/addPerson"
+    <TextView
+        android:id="@+id/tv_customer_surname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Add"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonSurname" />
+        android:layout_marginStart="8dp"
+        android:text="Soyad"
+        android:textSize="24dp"
+        app:layout_constraintStart_toEndOf="@+id/tv_customer_name"
+        app:layout_constraintTop_toTopOf="@+id/tv_customer_name" />
 
-    <Button
-        android:id="@+id/listPerson"
-        android:layout_marginTop="24dp"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tv_total_fee"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="List"
+        android:layout_marginBottom="8dp"
+        android:textSize="24dp"
+        android:text="Toplam Tutar"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addPerson" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_total_fee"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listPerson" />
-
+        app:layout_constraintTop_toBottomOf="@id/tv_customer_name" />
 </androidx.constraintlayout.widget.ConstraintLayout>

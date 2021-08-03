@@ -27,7 +27,7 @@
         app:layout_constraintTop_toTopOf="@+id/tv_customer_name" />
 
     <TextView
-        android:id="@+id/tv_total_fee"
+        android:id="@+id/tv_total_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -43,7 +43,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/tv_total_fee"
+        app:layout_constraintBottom_toTopOf="@+id/tv_total_price"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_customer_name" />

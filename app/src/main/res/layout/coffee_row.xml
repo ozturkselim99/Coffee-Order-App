@@ -11,9 +11,9 @@
 
         <ImageView
             android:id="@+id/img_coffee"
-            android:layout_width="100dp"
+            android:layout_width="80dp"
             android:layout_height="150dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="4dp"
             android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -30,12 +30,12 @@
             app:layout_constraintTop_toTopOf="@+id/img_coffee" />
 
         <TextView
-            android:id="@+id/tv_coffee_fee"
+            android:id="@+id/tv_coffee_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="10.00"
-            android:textSize="24dp"
+            android:textSize="20dp"
             app:layout_constraintStart_toStartOf="@+id/img_coffee"
             app:layout_constraintTop_toBottomOf="@+id/img_coffee">
 
@@ -47,9 +47,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
             android:text="TL"
-            android:textSize="24dp"
-            app:layout_constraintStart_toEndOf="@+id/tv_coffee_fee"
-            app:layout_constraintTop_toTopOf="@+id/tv_coffee_fee">
+            android:textSize="20dp"
+            app:layout_constraintStart_toEndOf="@+id/tv_coffee_price"
+            app:layout_constraintTop_toTopOf="@+id/tv_coffee_price">
 
         </TextView>
 
@@ -57,8 +57,8 @@
             android:id="@+id/rg_coffee_size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
             android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/img_coffee"
             app:layout_constraintTop_toBottomOf="@+id/tv_coffee_name">
 
@@ -66,22 +66,22 @@
                 android:id="@+id/rb_small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="RadioSize"
-                android:text="Küçük" />
+                android:text="Küçük"
+                android:textSize="12dp" />
 
             <RadioButton
                 android:id="@+id/rb_medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="RadioSize"
-                android:text="Orta" />
+                android:text="Orta (+2 TL)"
+                android:textSize="12dp" />
 
             <RadioButton
                 android:id="@+id/rb_large"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="RadioSize"
-                android:text="Büyük" />
+                android:text="Büyük (+4 TL)"
+                android:textSize="12dp" />
 
         </RadioGroup>
 
@@ -90,7 +90,8 @@
             android:id="@+id/cb_cream"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Krema"
+            android:text="Krema (+2 TL)"
+            android:textSize="12dp"
             app:layout_constraintStart_toStartOf="@+id/rg_coffee_size"
             app:layout_constraintTop_toBottomOf="@+id/rg_coffee_size" />
 
@@ -99,8 +100,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="32dp"
-            android:text="Çikolata Şurubu"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginLeft="4dp"
+            android:textSize="12dp"
+            android:text="Çikolata Şurubu (+2 TL)"
             app:layout_constraintStart_toEndOf="@+id/cb_cream"
             app:layout_constraintTop_toTopOf="@+id/cb_cream" />
 
@@ -108,7 +110,7 @@
             android:id="@+id/sw_sugar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Şeker"
+            android:text="Şeker (+1 TL)"
             app:layout_constraintStart_toStartOf="@+id/cb_cream"
             app:layout_constraintTop_toBottomOf="@+id/cb_cream"
             tools:ignore="UseSwitchCompatOrMaterialXml">

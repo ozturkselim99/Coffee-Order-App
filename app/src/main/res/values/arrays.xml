@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="CoffeeName">
+        <item>Latte</item>
+        <item>Macchiato</item>
+        <item>Cappucino</item>
+        <item>Türk Kahvesi</item>
+    </string-array>
+
+    <string-array name="CoffeePrice">
+        <item>15.25</item>
+        <item>17.00</item>
+        <item>20.75</item>
+        <item>13.00</item>
+    </string-array>
+
+    <string-array name="CoffeeAmount">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+
+
+</resources>

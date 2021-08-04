@@ -27,7 +27,7 @@
             android:layout_height="wrap_content">
             <TextView
                 android:id="@+id/coffee_name"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Kahve Adı"></TextView>
@@ -37,14 +37,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <RadioButton
+                    android:id="@+id/kucuk"
                     android:text="Küçük"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"></RadioButton>
                 <RadioButton
+                    android:id="@+id/orta"
                     android:text="Orta"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"></RadioButton>
                 <RadioButton
+                    android:id="@+id/buyuk"
                     android:text="Büyük"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"></RadioButton>
@@ -91,7 +94,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:text="Siparis Ver"></Button>
+                android:text="Ekle"></Button>
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:padding="16dp"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".activity.MainActivity">
 
     <TextView
         android:id="@+id/tv_customer_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ad"
+        android:text="@string/name"
         android:textSize="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="Soyad"
+        android:text="@string/surname"
         android:textSize="24dp"
         app:layout_constraintStart_toEndOf="@+id/tv_customer_name"
         app:layout_constraintTop_toTopOf="@+id/tv_customer_name" />
@@ -30,11 +30,11 @@
         android:id="@+id/tv_total_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
         android:layout_marginBottom="8dp"
+        android:text="@string/total_price"
         android:textSize="24dp"
-        android:text="Toplam Tutar"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -47,4 +47,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_customer_name" />
+
+    <Button
+        android:id="@+id/btn_give_order"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/give_order"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_total_price"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.467"
+        app:layout_constraintStart_toEndOf="@+id/tv_total_price"
+        app:layout_constraintTop_toTopOf="@+id/tv_total_price" />
 </androidx.constraintlayout.widget.ConstraintLayout>

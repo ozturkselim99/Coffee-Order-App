@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">BasicExample</string>
+    <string name="coffee_name">Kahve Adı</string>
+    <string name="tl">TL</string>
+    <string name="small">Küçük</string>
+    <string name="medium">Orta (+2 TL)</string>
+    <string name="large">Büyük (+4 TL)</string>
+    <string name="cream">Krema (+2 TL)</string>
+    <string name="chocolate_syrub">Çikolata Şurubu (+2 TL)</string>
+    <string name="sugar">Şeker (+1 TL)</string>
+    <string name="add">Ekle</string>
+    <string name="amount">Adet:</string>
+    <string name="total_price">Toplam Tutar</string>
+    <string name="surname">Soyad</string>
+    <string name="name">Ad</string>
+    <string name="give_order">Sipariş Ver</string>
+    <string name="coffee_size">Kahve Boyutu</string>
 </resources>

@@ -1,100 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_marginBottom="8dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
         <ImageView
-            android:id="@+id/img_coffee"
-            android:layout_width="wrap_content"
-            android:layout_height="180dp"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/imageView"
+            android:layout_width="115dp"
+            android:layout_height="115dp"
             tools:srcCompat="@tools:sample/avatars" />
+        <LinearLayout
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/coffee_name"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kahve Adı"></TextView>
+            <RadioGroup
+                android:id="@+id/radio_group"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <RadioButton
+                    android:id="@+id/kucuk"
+                    android:text="Küçük"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"></RadioButton>
+                <RadioButton
+                    android:id="@+id/orta"
+                    android:text="Orta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"></RadioButton>
+                <RadioButton
+                    android:id="@+id/buyuk"
+                    android:text="Büyük"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"></RadioButton>
+            </RadioGroup>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <CheckBox
+                    android:id="@+id/checkbox_1"
+                    android:text="Çikolata Şurubu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </CheckBox>
+                <CheckBox
+                    android:id="@+id/checkbox_2"
+                    android:text="Krema"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </CheckBox>
+            </LinearLayout>
+            <Switch
+                android:id="@+id/switch2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Şeker" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Adet:"
+                android:textSize="16dp"></TextView>
 
-        <TextView
-            android:id="@+id/tv_coffee_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:text="Kahve Adı"
-            app:layout_constraintStart_toEndOf="@+id/img_coffee"
-            app:layout_constraintTop_toTopOf="@+id/img_coffee"
-            android:textSize="24dp"/>
+            <EditText
+                android:text="1"
+                android:id="@+id/adet"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                android:textSize="16sp" />
 
-        <RadioButton
-            android:id="@+id/rb_small"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:text="Küçük"
-            android:textSize="14dp"
-            app:layout_constraintStart_toEndOf="@+id/img_coffee"
-            app:layout_constraintTop_toBottomOf="@+id/tv_coffee_name" />
-
-        <RadioButton
-            android:id="@+id/rb_medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Orta"
-            android:textSize="14dp"
-            app:layout_constraintEnd_toStartOf="@+id/rb_large"
-            app:layout_constraintStart_toEndOf="@+id/rb_small"
-            app:layout_constraintTop_toTopOf="@+id/rb_small" />
-
-        <RadioButton
-            android:id="@+id/rb_large"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:text="Büyük"
-            android:textSize="14dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/rb_medium" />
-
-        <CheckBox
-            android:id="@+id/cb_cream"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Krema"
-            app:layout_constraintStart_toStartOf="@+id/rb_small"
-            app:layout_constraintTop_toBottomOf="@+id/rb_small" />
-
-        <CheckBox
-            android:id="@+id/cb_chocolate_syrup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Çikolata Şurubu"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/cb_cream"
-            app:layout_constraintTop_toTopOf="@+id/cb_cream" />
-
-        <Switch
-            android:id="@+id/sw_sugar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:text="Şeker"
-            app:layout_constraintStart_toStartOf="@+id/cb_cream"
-            app:layout_constraintTop_toBottomOf="@+id/cb_cream"
-            tools:ignore="UseSwitchCompatOrMaterialXml">
-        </Switch>
-
-        <Button
-            android:id="@+id/btn_add_coffee"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
-            android:text="Ekle"
-            app:layout_constraintBottom_toBottomOf="@+id/img_coffee"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.cardview.widget.CardView>
+            <Button
+                android:id="@+id/siparis_ver"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:text="Ekle"></Button>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

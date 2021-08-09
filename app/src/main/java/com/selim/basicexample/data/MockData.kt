@@ -2,6 +2,7 @@ package com.selim.basicexample.data
 
 import com.selim.basicexample.model.Coffee
 import com.selim.basicexample.model.CoffeeCategory
+import com.selim.basicexample.model.User
 
 object MockData {
 

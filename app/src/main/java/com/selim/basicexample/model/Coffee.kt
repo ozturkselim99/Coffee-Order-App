@@ -4,7 +4,7 @@ import android.os.Parcel
 import android.os.Parcelable
 
 class Coffee(
-    var id:String?="",
+    var id: String? ="",
     var name: String? ="",
     var price: String? ="",
     var imageUrl: String? ="",

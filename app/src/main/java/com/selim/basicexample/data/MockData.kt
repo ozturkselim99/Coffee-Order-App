@@ -2,6 +2,7 @@ package com.selim.basicexample.data
 
 import com.selim.basicexample.model.Coffee
 import com.selim.basicexample.model.CoffeeCategory
+import com.selim.basicexample.model.User
 
 object MockData {
 
@@ -42,5 +43,10 @@ object MockData {
     fun getCoffeeCategories():ArrayList<CoffeeCategory>
     {
         return coffeeCategoryList
+    }
+
+    fun getUserList():ArrayList<User>
+    {
+        return  userList
     }
 }

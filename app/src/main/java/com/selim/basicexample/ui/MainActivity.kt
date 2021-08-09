@@ -5,11 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.selim.basicexample.R
-import com.selim.basicexample.adapter.CategoryAdapter
 import com.selim.basicexample.adapter.CoffeeAdapter
 import com.selim.basicexample.data.MockData
 import com.selim.basicexample.model.Coffee
@@ -42,11 +39,11 @@ class MainActivity : AppCompatActivity() {
         recycler_view_category.adapter=categoryAdapter
 
         //Adapter içindeki total değişkenimizi gözlemliyoruz. Değişkende bir değişiklik olduğunda activity_xml içindeki total_price textini değiştiriyoruz.
-        coffeeAdapter.total.observe(this, Observer {
+        adapter.total.observe(this, Observer {
             total_price.text="Toplam Tutar: "+it.toString()+"₺"
             totalBasket=it
         })
-        coffeeAdapter.basket.observe(this, Observer {
+        adapter.basket.observe(this, Observer {
             basketList=it
         })
 

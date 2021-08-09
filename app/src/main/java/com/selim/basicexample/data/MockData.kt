@@ -44,4 +44,9 @@ object MockData {
     {
         return coffeeCategoryList
     }
+
+    fun getUserList():ArrayList<User>
+    {
+        return  userList
+    }
 }

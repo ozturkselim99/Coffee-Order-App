@@ -12,8 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BasicExample">
         <activity android:name=".ui.BasketActivity" />
-        <activity android:name=".ui.MainActivity" />
-        <activity android:name=".ui.LoginActivity">
+        <activity android:name=".ui.AddNewUserActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

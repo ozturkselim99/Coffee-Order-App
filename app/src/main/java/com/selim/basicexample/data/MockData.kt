@@ -2,7 +2,6 @@ package com.selim.basicexample.data
 
 import com.selim.basicexample.model.Coffee
 import com.selim.basicexample.model.CoffeeCategory
-import com.selim.basicexample.model.User
 
 object MockData {
 
@@ -21,7 +20,7 @@ object MockData {
             CoffeeCategory("6","Frappuccino","https://www.starbucks.com.tr/media/gingerbread-frappuccino_tcm95-66836_w1024_n.png"),
     )
 
-    private val coffeList= arrayListOf(
+    private val coffeeList = arrayListOf(
         Coffee("1","Iced Coffee","14","https://www.starbucks.com.tr/media/buzlu-filtre-kahve_tcm95-2007_w1024_n.png","1"),
         Coffee("2","Caffè Misto","15","https://www.starbucks.com.tr/media/caffe-misto_tcm95-1988_w1024_n.png","1"),
         Coffee("3","Cold Brew Latte","16","https://www.starbucks.com.tr/media/sutlu-cold-brew_tcm95-20069_w1024_n.png","1"),
@@ -36,17 +35,12 @@ object MockData {
         Coffee("12","White Chocolate Mocha Frappuccino","17","https://www.starbucks.com.tr/media/white-chocolate-mocha-frappuccino_tcm95-66931_w1024_n.png","6"),
     )
 
-    fun getCoffeList(): ArrayList<Coffee> {
-        return coffeList
+    fun getCoffeeList(): ArrayList<Coffee> {
+        return coffeeList
     }
 
     fun getCoffeeCategories():ArrayList<CoffeeCategory>
     {
-        return  coffeeCategoryList
-    }
-
-    fun getUserList():ArrayList<User>
-    {
-        return userList
+        return coffeeCategoryList
     }
 }

@@ -22,9 +22,9 @@ class BasketAdapter(val coffeeList:ArrayList<Coffee>): RecyclerView.Adapter<Bask
 
     override fun onBindViewHolder(holder: BasketAdapterVH, position: Int) {
         holder.itemView.basket_coffee_size.text=coffeeList.get(position).coffeeSize
-        holder.itemView.basket_coffe_name.text=coffeeList.get(position).name
+        holder.itemView.basket_coffee_name.text=coffeeList.get(position).name
         holder.itemView.basket_coffee_price.text=coffeeList.get(position).price
-        Glide.with(holder.itemView.context).load(coffeeList.get(position).imageUrl).centerCrop().into(holder.itemView.basket_coffe_image)
+        Glide.with(holder.itemView.context).load(coffeeList.get(position).imageUrl).centerCrop().into(holder.itemView.basket_coffee_image)
     }
 
     override fun getItemCount(): Int {

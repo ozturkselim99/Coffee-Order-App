@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.coffee_row.view.*
 class CoffeeAdapter(val coffeeList:ArrayList<Coffee>):RecyclerView.Adapter<CoffeeAdapter.CoffeeVH>() {
 
     var totalPrice:Double=0.0
-    var selectedCoffeSize:String="Küçük"
+    var selectedCoffeeSize:String="Küçük"
     var price:Double=0.0
     val _basket= arrayListOf<Coffee>()
     val  total=MutableLiveData<Double>()
@@ -42,9 +42,9 @@ class CoffeeAdapter(val coffeeList:ArrayList<Coffee>):RecyclerView.Adapter<Coffe
                 holder.itemView.buyuk.id->price+=3
             }
             when(holder.itemView.radio_group.checkedRadioButtonId){
-                holder.itemView.kucuk.id->selectedCoffeSize="Küçük"
-                holder.itemView.orta.id->selectedCoffeSize="Orta"
-                holder.itemView.buyuk.id->selectedCoffeSize="Büyük"
+                holder.itemView.kucuk.id->selectedCoffeeSize="Küçük"
+                holder.itemView.orta.id->selectedCoffeeSize="Orta"
+                holder.itemView.buyuk.id->selectedCoffeeSize="Büyük"
             }
 
             when(holder.itemView.checkbox_1.isChecked){
@@ -67,7 +67,7 @@ class CoffeeAdapter(val coffeeList:ArrayList<Coffee>):RecyclerView.Adapter<Coffe
                 val coffee=Coffee()
                 coffee.imageUrl=coffeeList.get(position).imageUrl
                 coffee.price=price.toString()
-                coffee.coffeeSize=selectedCoffeSize
+                coffee.coffeeSize=selectedCoffeeSize
                 coffee.name=coffeeList.get(position).name
                 _basket.add(coffee)
                 basket.value=_basket

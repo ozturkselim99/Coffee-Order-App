@@ -18,7 +18,7 @@
             android:id="@+id/imageView"
             android:layout_width="115dp"
             android:layout_height="115dp"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="@tools:sample/avatars"/>
         <LinearLayout
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
@@ -30,7 +30,7 @@
                 android:textSize="16sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Kahve Adı"></TextView>
+                android:text="Kahve Adı"/>
             <RadioGroup
                 android:id="@+id/radio_group"
                 android:orientation="horizontal"
@@ -40,17 +40,17 @@
                     android:id="@+id/kucuk"
                     android:text="Küçük"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"></RadioButton>
+                    android:layout_height="wrap_content"/>
                 <RadioButton
                     android:id="@+id/orta"
                     android:text="Orta"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"></RadioButton>
+                    android:layout_height="wrap_content"/>
                 <RadioButton
                     android:id="@+id/buyuk"
                     android:text="Büyük"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"></RadioButton>
+                    android:layout_height="wrap_content"/>
             </RadioGroup>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -73,12 +73,13 @@
                 android:id="@+id/switch2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Şeker" />
+                android:text="Şeker"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Adet:"
-                android:textSize="16dp"></TextView>
+                android:textSize="16dp"/>
 
             <EditText
                 android:text="1"
@@ -94,7 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:text="Ekle"></Button>
+                android:text="Ekle"/>
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

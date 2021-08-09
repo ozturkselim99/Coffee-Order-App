@@ -1,5 +1,6 @@
 package com.selim.basicexample.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.selim.basicexample.R
@@ -35,6 +36,11 @@ class AddNewUserActivity : AppCompatActivity() {
                 et_phone.requestFocus()
                 return@setOnClickListener
             }
+        }
+
+        btn_register_to_login.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
         }
     }
 }

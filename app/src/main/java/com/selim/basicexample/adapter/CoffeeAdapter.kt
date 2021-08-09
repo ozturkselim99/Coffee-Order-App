@@ -17,7 +17,7 @@ class CoffeeAdapter(val coffeeList:ArrayList<Coffee>):RecyclerView.Adapter<Coffe
     var selectedCoffeeSize:String="Küçük"
     var price:Double=0.0
     val _basket= arrayListOf<Coffee>()
-    val  total=MutableLiveData<Double>()
+    val total=MutableLiveData<Double>()
     val basket=MutableLiveData<ArrayList<Coffee>>()
 
     class CoffeeVH(itemView: View):RecyclerView.ViewHolder(itemView) {

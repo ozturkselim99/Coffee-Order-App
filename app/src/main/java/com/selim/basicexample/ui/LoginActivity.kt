@@ -28,7 +28,11 @@ class LoginActivity : AppCompatActivity() {
             {
                 Toast.makeText(this,"Kullanıcı adı veya şifre yanlış",Toast.LENGTH_LONG).show()
             }
+        }
 
+        btn_login_to_register.setOnClickListener {
+            var intent = Intent(this, AddNewUserActivity::class.java)
+            startActivity(intent)
         }
     }
 }

@@ -13,6 +13,7 @@
         android:theme="@style/Theme.BasicExample">
         <activity android:name=".ui.BasketActivity" />
         <activity android:name=".ui.MainActivity" />
+        <activity android:name=".ui.AddNewUserActivity"/>
         <activity android:name=".ui.LoginActivity">
 
             <intent-filter>

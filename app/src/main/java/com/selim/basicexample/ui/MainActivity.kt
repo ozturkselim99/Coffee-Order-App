@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.selim.basicexample.R
+import com.selim.basicexample.adapter.CategoryAdapter
 import com.selim.basicexample.adapter.CoffeeAdapter
 import com.selim.basicexample.data.MockData
 import com.selim.basicexample.model.Coffee
@@ -32,18 +34,18 @@ class MainActivity : AppCompatActivity() {
         val coffeeAdapter= CoffeeAdapter(MockData.getCoffeeList())
         recycler_view_product.adapter=coffeeAdapter
 
-        val gridLayoutManager=GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false)
+        val gridLayoutManager= GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false)
         recycler_view_category.layoutManager=gridLayoutManager
 
         val categoryAdapter = CategoryAdapter(MockData.getCoffeeCategories())
         recycler_view_category.adapter=categoryAdapter
 
         //Adapter içindeki total değişkenimizi gözlemliyoruz. Değişkende bir değişiklik olduğunda activity_xml içindeki total_price textini değiştiriyoruz.
-        adapter.total.observe(this, Observer {
+        coffeeAdapter.total.observe(this, Observer {
             total_price.text="Toplam Tutar: "+it.toString()+"₺"
             totalBasket=it
         })
-        adapter.basket.observe(this, Observer {
+        coffeeAdapter.basket.observe(this, Observer {
             basketList=it
         })
 

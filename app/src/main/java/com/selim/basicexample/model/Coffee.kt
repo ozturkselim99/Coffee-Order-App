@@ -4,27 +4,33 @@ import android.os.Parcel
 import android.os.Parcelable
 
 class Coffee(
+    var id:String?="",
     var name: String? ="",
     var price: String? ="",
-    var imageUrl: String? =""
+    var imageUrl: String? ="",
+    var categoryId:String?=""
+
 ): Parcelable
 {
     var count:Int=0
     var coffeeSize:String=""
 
     constructor(parcel: Parcel) : this(
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString()
-    ) {
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString()) {
         count = parcel.readInt()
         coffeeSize = parcel.readString().toString()
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(id)
         parcel.writeString(name)
         parcel.writeString(price)
         parcel.writeString(imageUrl)
+        parcel.writeString(categoryId)
         parcel.writeInt(count)
         parcel.writeString(coffeeSize)
     }

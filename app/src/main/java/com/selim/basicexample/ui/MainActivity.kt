@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         val layoutManager=LinearLayoutManager(this)
         recyclerView.layoutManager=layoutManager
 
-        val adapter= CoffeeAdapter(MockData.getMockData())
+        val adapter= CoffeeAdapter(MockData.getCoffeList())
         recyclerView.adapter=adapter
 
         //Adapter içindeki total değişkenimizi gözlemliyoruz. Değişkende bir değişiklik olduğunda activity_xml içindeki total_price textini değiştiriyoruz.

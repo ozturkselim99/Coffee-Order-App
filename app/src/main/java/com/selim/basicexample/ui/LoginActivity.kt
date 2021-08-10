@@ -9,6 +9,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.selim.basicexample.R
+import kotlinx.android.synthetic.main.activity_add_new_user.*
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
@@ -24,7 +25,18 @@ class LoginActivity : AppCompatActivity() {
         auth = Firebase.auth
 
         btn_login.setOnClickListener {
-            // todo: kontroller eklenecek. mail adres ve pass word boş olamaz.
+            if(login_et_mail.text.isEmpty())
+            {
+                login_et_mail.error = "Email adresinizi giriniz"
+                login_et_mail.requestFocus()
+                return@setOnClickListener
+            }
+            if(login_et_password.text.isEmpty())
+            {
+                login_et_password.error = "Parolanızı giriniz"
+                login_et_password.requestFocus()
+                return@setOnClickListener
+            }
 
             auth?.signInWithEmailAndPassword(
                 emailAddressEdittextView.text.toString(),

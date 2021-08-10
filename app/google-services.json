@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "380670308736",
+    "project_id": "coffee-staj",
+    "storage_bucket": "coffee-staj.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:380670308736:android:c71b1083d5aee76b145165",
+        "android_client_info": {
+          "package_name": "com.selim.basicexample"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "380670308736-nrde3r4s7k7td80kvsaug60t1hd5e8on.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWMrSNe47svEbF4RPMxgIXx02Wb1AiF2U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "380670308736-nrde3r4s7k7td80kvsaug60t1hd5e8on.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

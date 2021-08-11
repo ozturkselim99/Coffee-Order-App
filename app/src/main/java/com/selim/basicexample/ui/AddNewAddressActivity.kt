@@ -1,5 +1,6 @@
 package com.selim.basicexample
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +9,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.selim.basicexample.model.Address
+import com.selim.basicexample.ui.LoginActivity
 import kotlinx.android.synthetic.main.activity_add_new_address.*
 
 // todo: selim
@@ -18,7 +20,12 @@ class AddNewAddressActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        // todo: login kontrolü eklenecek
+        auth = Firebase.auth
+
+        if (auth?.currentUser == null) {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +38,6 @@ class AddNewAddressActivity : AppCompatActivity() {
 
         adresEkle.setOnClickListener {
 
-            //todo: Textbox kontrolü return eklenmeli
 
             if (editText_adresAdi.text.isEmpty()) {
                 editText_adresAdi.error = "Adres adı boş geçilemez"
@@ -43,42 +49,56 @@ class AddNewAddressActivity : AppCompatActivity() {
 
             if (editText_cadde.text.isEmpty()) {
                 editText_cadde.error = "Cadde adı boş geçilemez"
+                editText_cadde.requestFocus()
+                return@setOnClickListener
             } else {
                 address.avenue = editText_cadde.text.toString()
             }
 
             if (editText_il.text.isEmpty()) {
                 editText_il.error = "İl adı boş geçilemez"
+                editText_il.requestFocus()
+                return@setOnClickListener
             } else {
                 address.city = editText_il.text.toString()
             }
 
             if (editText_ilce.text.isEmpty()) {
                 editText_ilce.error = "İlçe adı boş geçilemez"
+                editText_ilce.requestFocus()
+                return@setOnClickListener
             } else {
                 address.district = editText_ilce.text.toString()
             }
 
             if (editText_mahalle.text.isEmpty()) {
                 editText_mahalle.error = "Mahalle adı boş geçilemez"
+                editText_mahalle.requestFocus()
+                return@setOnClickListener
             } else {
                 address.neighborhood = editText_mahalle.text.toString()
             }
 
             if (editText_sokak.text.isEmpty()) {
                 editText_sokak.error = "Sokak adı boş geçilemez"
+                editText_sokak.requestFocus()
+                return@setOnClickListener
             } else {
                 address.street = editText_sokak.text.toString()
             }
 
             if (editText_ickapi.text.isEmpty()) {
                 editText_ickapi.error = "İç kapı numarası boş geçilemez"
+                editText_ickapi.requestFocus()
+                return@setOnClickListener
             } else {
                 address.number = editText_ickapi.text.toString().toInt()
             }
 
             if (editText_diskapi.text.isEmpty()) {
                 editText_diskapi.error = "Dış kapı numarası boş geçilemez"
+                editText_diskapi.requestFocus()
+                return@setOnClickListener
             } else {
                 address.builderNumer = editText_diskapi.text.toString().toInt()
             }

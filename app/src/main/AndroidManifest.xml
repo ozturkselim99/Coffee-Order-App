@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BasicExample">
-        <activity android:name=".ui.AddNewCategoryActivity"></activity>
+        <activity android:name=".ui.AddNewCategoryActivity"/>
+        <activity android:name=".ui.AddNewUserActivity"/>
         <activity android:name=".ui.CoffeeCategoryActivity" />
         <activity android:name=".ui.AddressActivity" />
         <activity android:name=".ui.BasketActivity" />

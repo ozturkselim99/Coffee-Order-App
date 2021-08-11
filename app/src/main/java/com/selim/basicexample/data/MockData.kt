@@ -22,6 +22,7 @@ object MockData {
             CoffeeCategory("6","Frappuccino","https://www.starbucks.com.tr/media/gingerbread-frappuccino_tcm95-66836_w1024_n.png"),
     )
 
+
     private val coffeeList = arrayListOf(
         Coffee("1","Iced Coffee","14","https://www.starbucks.com.tr/media/buzlu-filtre-kahve_tcm95-2007_w1024_n.png","1"),
         Coffee("2","Caffè Misto","15","https://www.starbucks.com.tr/media/caffe-misto_tcm95-1988_w1024_n.png","1"),

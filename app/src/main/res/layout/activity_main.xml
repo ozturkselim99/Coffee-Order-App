@@ -66,5 +66,14 @@
         app:layout_constraintEnd_toStartOf="@+id/button_sign_out"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/btn_coffees"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="Coffees"
+        app:layout_constraintBottom_toTopOf="@+id/recycler_view_category"
+        app:layout_constraintEnd_toStartOf="@+id/btn_address" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

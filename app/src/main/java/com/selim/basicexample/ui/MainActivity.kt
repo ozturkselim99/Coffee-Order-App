@@ -13,7 +13,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.selim.basicexample.R
 import com.selim.basicexample.adapter.CategoryAdapter
-import com.selim.basicexample.adapter.CoffeeAdapter
+import com.selim.basicexample.adapter.CoffeeHomeAdapter
 import com.selim.basicexample.data.MockData
 import com.selim.basicexample.model.Coffee
 import kotlinx.android.synthetic.main.activity_main.*
@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         val layoutManager = LinearLayoutManager(this)
         recycler_view_product.layoutManager = layoutManager
 
-        val coffeeAdapter = CoffeeAdapter(MockData.getCoffeeList())
+        val coffeeAdapter = CoffeeHomeAdapter(MockData.getCoffeeList())
         recycler_view_product.adapter = coffeeAdapter
 
         val gridLayoutManager = GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false)
@@ -73,6 +73,10 @@ class MainActivity : AppCompatActivity() {
 
         btn_address.setOnClickListener {
             val intent = Intent(this, AddressActivity::class.java)
+            startActivity(intent)
+        }
+        btn_coffees.setOnClickListener {
+            val intent = Intent(this, CoffeesActivity::class.java)
             startActivity(intent)
         }
     }

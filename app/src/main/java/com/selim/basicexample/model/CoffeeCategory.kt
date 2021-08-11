@@ -7,6 +7,11 @@ class CoffeeCategory (
         var imageUrl:String="",
 
 )
+{
+        override fun toString(): String {
+                return name
+        }
+}
 
 
 

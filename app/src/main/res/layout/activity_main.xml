@@ -7,13 +7,43 @@
     android:padding="16dp"
     tools:context=".ui.MainActivity">
 
-    <Button
-        android:id="@+id/button_sign_out"
-        android:layout_width="wrap_content"
+
+    <LinearLayout
+        android:id="@+id/buttons"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Çıkış"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="32dp"
+        android:orientation="horizontal"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/recycler_view_category"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="16dp">
+
+        <Button
+            android:id="@+id/btn_coffees"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Kahveler"></Button>
+
+        <Button
+            android:id="@+id/btn_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="2dp"
+            android:layout_weight="1"
+            android:text="Adresler"></Button>
+
+        <Button
+            android:id="@+id/btn_categories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Kategoriler"></Button>
+
+    </LinearLayout>
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_category"
@@ -23,7 +53,7 @@
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_sign_out"
+        app:layout_constraintTop_toBottomOf="@+id/buttons"
         tools:itemCount="1"
         tools:listitem="@layout/item_category" />
 
@@ -58,30 +88,13 @@
         app:layout_constraintTop_toTopOf="@+id/total_price" />
 
     <Button
-        android:id="@+id/btn_address"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Adresler"
-        app:layout_constraintEnd_toStartOf="@+id/button_sign_out"
-        app:layout_constraintStart_toEndOf="@+id/btn_categories"
+        android:id="@+id/button_sign_out"
+        android:layout_width="122dp"
+        android:layout_height="44dp"
+        android:text="Çıkış Yap"
+        app:layout_constraintBottom_toTopOf="@+id/buttons"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btn_categories"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Kategoriler"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btn_coffees"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:text="Coffees"
-        app:layout_constraintBottom_toTopOf="@+id/recycler_view_category"
-        app:layout_constraintEnd_toStartOf="@+id/btn_address" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

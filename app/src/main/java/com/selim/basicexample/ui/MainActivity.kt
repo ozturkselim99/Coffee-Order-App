@@ -14,6 +14,7 @@ import com.google.firebase.ktx.Firebase
 import com.selim.basicexample.R
 import com.selim.basicexample.adapter.CategoryAdapter
 import com.selim.basicexample.adapter.CoffeeAdapter
+import com.selim.basicexample.adapter.CoffeeHomeAdapter
 import com.selim.basicexample.data.MockData
 import com.selim.basicexample.model.Coffee
 import kotlinx.android.synthetic.main.activity_main.*
@@ -77,6 +78,11 @@ class MainActivity : AppCompatActivity() {
         }
         btn_coffees.setOnClickListener {
             val intent = Intent(this, CoffeesActivity::class.java)
+            startActivity(intent)
+        }
+
+        btn_categories.setOnClickListener {
+            val intent = Intent(this, CoffeeCategoryActivity::class.java)
             startActivity(intent)
         }
     }

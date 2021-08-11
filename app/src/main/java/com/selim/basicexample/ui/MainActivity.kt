@@ -13,7 +13,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.selim.basicexample.R
 import com.selim.basicexample.adapter.CategoryAdapter
-import com.selim.basicexample.adapter.CoffeeHomeAdapter
+import com.selim.basicexample.adapter.CoffeeAdapter
 import com.selim.basicexample.data.MockData
 import com.selim.basicexample.model.Coffee
 import kotlinx.android.synthetic.main.activity_main.*

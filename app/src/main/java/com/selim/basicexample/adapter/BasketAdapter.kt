@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.selim.basicexample.R
 import com.selim.basicexample.model.Coffee
-import kotlinx.android.synthetic.main.basket_item_row.view.*
+import kotlinx.android.synthetic.main.item_basket.view.*
 
 class BasketAdapter(val coffeeList:ArrayList<Coffee>): RecyclerView.Adapter<BasketAdapter.BasketAdapterVH>() {
 
@@ -16,7 +16,7 @@ class BasketAdapter(val coffeeList:ArrayList<Coffee>): RecyclerView.Adapter<Bask
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BasketAdapterVH {
-        val itemView= LayoutInflater.from(parent.context).inflate(R.layout.basket_item_row, parent,false)
+        val itemView= LayoutInflater.from(parent.context).inflate(R.layout.item_basket, parent,false)
         return BasketAdapterVH(itemView)
     }
 

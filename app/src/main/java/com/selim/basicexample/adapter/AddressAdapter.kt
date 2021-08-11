@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.selim.basicexample.R
 import com.selim.basicexample.model.Address
-import kotlinx.android.synthetic.main.address_row.view.*
+import kotlinx.android.synthetic.main.item_address.view.*
 
 class AddressAdapter(val addressList: MutableList<Address>) :
     RecyclerView.Adapter<AddressAdapter.AddressVH>() {
@@ -15,7 +15,7 @@ class AddressAdapter(val addressList: MutableList<Address>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AddressVH {
         val itemView =
-            LayoutInflater.from(parent.context).inflate(R.layout.address_row, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.item_address, parent, false)
         return AddressVH(itemView)
     }
 

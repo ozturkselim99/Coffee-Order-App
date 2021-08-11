@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.selim.basicexample.R
 import com.selim.basicexample.model.CoffeeCategory
-import kotlinx.android.synthetic.main.coffee_row.view.*
 import kotlinx.android.synthetic.main.item_category.view.*
 
 class CategoryAdapter(val categoryList:ArrayList<CoffeeCategory>): RecyclerView.Adapter<CategoryAdapter.CategoryVH>() {

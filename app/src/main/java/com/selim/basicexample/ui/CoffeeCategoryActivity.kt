@@ -1,5 +1,6 @@
 package com.selim.basicexample.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,6 +20,11 @@ class CoffeeCategoryActivity : AppCompatActivity() {
 
         val categoryMenuAdapter = CategoryMenuAdapter(MockData.getCoffeeCategories())
         recycler_view_category_menu.adapter = categoryMenuAdapter
+
+        fab_add_category.setOnClickListener {
+            val intent = Intent(this, AddNewCategoryActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 }

@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.selim.basicexample.R
 import com.selim.basicexample.model.Coffee
-import kotlinx.android.synthetic.main.coffee_row.view.*
+import kotlinx.android.synthetic.main.item_coffee.view.*
 
 class CoffeeAdapter(val coffeeList:ArrayList<Coffee>):RecyclerView.Adapter<CoffeeAdapter.CoffeeVH>() {
 
@@ -25,7 +25,7 @@ class CoffeeAdapter(val coffeeList:ArrayList<Coffee>):RecyclerView.Adapter<Coffe
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoffeeVH {
-        val itemView=LayoutInflater.from(parent.context).inflate(R.layout.coffee_row,parent,false)
+        val itemView=LayoutInflater.from(parent.context).inflate(R.layout.item_coffee,parent,false)
         return CoffeeVH(itemView)
     }
 

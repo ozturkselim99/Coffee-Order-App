@@ -44,7 +44,7 @@ class LoginActivity : AppCompatActivity() {
             )
                 ?.addOnSuccessListener {
                     val user = auth?.currentUser
-                    Toast.makeText(this, "Hoşgeldiniz ${user?.email}", Toast.LENGTH_LONG)
+                    Toast.makeText(this, "Hoşgeldiniz ${user?.displayName}", Toast.LENGTH_LONG)
                         .show()
                 }?.addOnFailureListener {
                     Toast.makeText(this, "Kullanıcı Bulunamadı", Toast.LENGTH_LONG)

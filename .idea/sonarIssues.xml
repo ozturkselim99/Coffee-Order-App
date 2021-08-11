@@ -18,12 +18,27 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/selim/basicexample/ui/AddNewAddressActivity.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/selim/basicexample/ui/AddNewUserActivity.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/selim/basicexample/ui/LoginActivity.kt">
           <value>
             <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/selim/basicexample/ui/MainActivity.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/res/layout/activity_add_new_address.xml">
           <value>
             <set />
           </value>
@@ -174,6 +189,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/../smart-alarm-android/version.properties">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="/fragment.kt">
           <value>
             <set />
           </value>

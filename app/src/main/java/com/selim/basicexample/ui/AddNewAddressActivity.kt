@@ -7,6 +7,12 @@ import kotlinx.android.synthetic.main.activity_add_new_address.*
 
 class AddNewAddressActivity : AppCompatActivity() {
 
+
+    override fun onResume() {
+        super.onResume()
+        // todo: login kontrolü eklenecek
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_new_address)
@@ -18,7 +24,10 @@ class AddNewAddressActivity : AppCompatActivity() {
             if( editText_adresAdi.text.isEmpty())
             {
                 editText_adresAdi.error="Adres adı boş geçilemez"
+                editText_adresAdi.requestFocus()
+                return@setOnClickListener
             }
+
             if( editText_cadde.text.isEmpty())
             {
                 editText_cadde.error="Cadde adı boş geçilemez"
@@ -48,6 +57,13 @@ class AddNewAddressActivity : AppCompatActivity() {
                 editText_diskapi.error="Dış kapı numarası boş geçilemez"
             }
 
+
+            addNewAddress()
+
         }
+    }
+
+    private fun addNewAddress() {
+
     }
 }

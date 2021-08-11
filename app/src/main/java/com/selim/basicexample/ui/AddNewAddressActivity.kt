@@ -125,6 +125,8 @@ class AddNewAddressActivity : AppCompatActivity() {
                                             "${address.addressName} eklendi",
                                             Toast.LENGTH_LONG
                                         ).show()
+
+                                        finish()
                                     }
                                     else -> {
                                         Toast.makeText(

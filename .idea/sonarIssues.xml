@@ -18,6 +18,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/selim/basicexample/adapter/AddressAdapter.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/selim/basicexample/model/Address.kt">
           <value>
             <set />
@@ -29,6 +34,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/selim/basicexample/ui/AddNewUserActivity.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/selim/basicexample/ui/AddressActivity.kt">
           <value>
             <set />
           </value>
@@ -48,12 +58,22 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/res/layout/activity_address.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml">
           <value>
             <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/res/layout/address_row.xml">
           <value>
             <set />
           </value>

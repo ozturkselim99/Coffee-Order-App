@@ -15,3 +15,11 @@ l
 <app/src/main/java/com/selim/basicexample/ui/LoginActivity.kt,a/d/adea77f58a2e844709b03b328edf079336a006cd
 q
 Aapp/src/main/java/com/selim/basicexample/ui/AddNewUserActivity.kt,c/7/c744d0155de53ed52d658664248ccd7b82c104f8
+m
+=app/src/main/java/com/selim/basicexample/ui/BasketActivity.kt,1/e/1e6a4e382bce6ab49397b164350f2f8e81df4f53
+t
+Dapp/src/main/java/com/selim/basicexample/ui/AddNewAddressActivity.kt,c/1/c11856f7ab0dd890f9bd7a95047995804e190ba8
+q
+Aapp/src/main/java/com/selim/basicexample/adapter/BasketAdapter.kt,f/2/f2fea035cbd2ecd71a12e137ec4be194758c40e4
+i
+9app/src/main/java/com/selim/basicexample/model/Address.kt,6/f/6f980f232f4060910620bb6e562f7c95e7de50ec

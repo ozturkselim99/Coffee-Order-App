@@ -5,9 +5,9 @@ data class Address(
     var addressName: String = "",
     var city: String = "",
     var district: String = "",
+    var avenue: String = "",
     var neighborhood: String = "",
     var street: String = "",
-    var avenue: String = "",
-    var builderNumer: Int = 0,
+    var buildingNumber: Int = 0,
     var number: Int = 0
 )

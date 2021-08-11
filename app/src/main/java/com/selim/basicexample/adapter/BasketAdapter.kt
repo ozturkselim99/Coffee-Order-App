@@ -16,7 +16,7 @@ class BasketAdapter(val coffeeList:ArrayList<Coffee>): RecyclerView.Adapter<Bask
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BasketAdapterVH {
-        val itemView= LayoutInflater.from(parent.context).inflate(R.layout.basket_item_row,parent,false)
+        val itemView= LayoutInflater.from(parent.context).inflate(R.layout.basket_item_row, parent,false)
         return BasketAdapterVH(itemView)
     }
 

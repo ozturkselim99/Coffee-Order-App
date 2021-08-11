@@ -100,12 +100,10 @@ class AddNewAddressActivity : AppCompatActivity() {
                 editText_diskapi.requestFocus()
                 return@setOnClickListener
             } else {
-                address.builderNumer = editText_diskapi.text.toString().toInt()
+                address.buildingNumber = editText_diskapi.text.toString().toInt()
             }
 
-
             addNewAddress(address)
-
         }
     }
 

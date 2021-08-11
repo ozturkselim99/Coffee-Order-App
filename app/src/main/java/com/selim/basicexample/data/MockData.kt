@@ -1,5 +1,6 @@
 package com.selim.basicexample.data
 
+import com.selim.basicexample.model.Address
 import com.selim.basicexample.model.Coffee
 import com.selim.basicexample.model.CoffeeCategory
 import com.selim.basicexample.model.User
@@ -36,6 +37,15 @@ object MockData {
         Coffee("12","White Chocolate Mocha Frappuccino","17","https://www.starbucks.com.tr/media/white-chocolate-mocha-frappuccino_tcm95-66931_w1024_n.png","6"),
     )
 
+    private val addressList = arrayListOf(
+        Address("1", "Ev", "Bursa", "Nilüfer", "Yüzüncüyıl", " ",
+            " ", 20, 17),
+        Address("2", "İş", "İstanbul", "Maslak", "Valla", "Buraları",
+            "Bilmiyorum", 11, 9),
+        Address("3", "Selim'in Evi", "İzmir", "Bu", "Adres", "Sende",
+            "Selim", 30, 38)
+    )
+
     fun getCoffeeList(): ArrayList<Coffee> {
         return coffeeList
     }
@@ -47,6 +57,11 @@ object MockData {
 
     fun getUserList():ArrayList<User>
     {
-        return  userList
+        return userList
+    }
+
+    fun getAddressList():ArrayList<Address>
+    {
+        return addressList
     }
 }

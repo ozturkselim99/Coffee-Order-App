@@ -70,6 +70,11 @@ class MainActivity : AppCompatActivity() {
             auth?.signOut()
             checkUser()
         }
+
+        btn_address.setOnClickListener {
+            val intent = Intent(this, AddressActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun checkUser() {

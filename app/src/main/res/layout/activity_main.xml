@@ -9,12 +9,11 @@
 
     <Button
         android:id="@+id/button_sign_out"
-        android:text="Sign Out"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign Out"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_height="wrap_content"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_category"
@@ -57,6 +56,15 @@
         app:layout_constraintBottom_toBottomOf="@+id/total_price"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/total_price" />
+
+    <Button
+        android:id="@+id/btn_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="Address"
+        app:layout_constraintEnd_toStartOf="@+id/button_sign_out"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

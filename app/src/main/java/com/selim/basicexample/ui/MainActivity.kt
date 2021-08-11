@@ -75,6 +75,11 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, AddressActivity::class.java)
             startActivity(intent)
         }
+
+        btn_categories.setOnClickListener {
+            val intent = Intent(this, CoffeeCategoryActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun checkUser() {

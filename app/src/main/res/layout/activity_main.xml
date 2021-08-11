@@ -61,9 +61,17 @@
         android:id="@+id/btn_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
         android:text="Address"
         app:layout_constraintEnd_toStartOf="@+id/button_sign_out"
+        app:layout_constraintStart_toEndOf="@+id/btn_categories"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_categories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kategoriler"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 

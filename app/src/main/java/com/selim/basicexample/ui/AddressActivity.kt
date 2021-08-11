@@ -1,9 +1,11 @@
 package com.selim.basicexample.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.selim.basicexample.AddNewAddressActivity
 import com.selim.basicexample.R
 import com.selim.basicexample.adapter.AddressAdapter
 import com.selim.basicexample.data.MockData
@@ -19,5 +21,15 @@ class AddressActivity : AppCompatActivity() {
 
         val addressAdapter = AddressAdapter(MockData.getAddressList())
         recycler_view_address.adapter = addressAdapter
+
+        btn_add_address.setOnClickListener {
+            val intent = Intent(this, AddNewAddressActivity::class.java)
+            startActivity(intent)
+        }
+
+        btn_address_to_main.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

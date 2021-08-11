@@ -9,6 +9,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.selim.basicexample.model.Address
+import com.selim.basicexample.ui.AddressActivity
 import com.selim.basicexample.ui.LoginActivity
 import kotlinx.android.synthetic.main.activity_add_new_address.*
 
@@ -37,8 +38,6 @@ class AddNewAddressActivity : AppCompatActivity() {
         val address = Address()
 
         adresEkle.setOnClickListener {
-
-
             if (editText_adresAdi.text.isEmpty()) {
                 editText_adresAdi.error = "Adres adı boş geçilemez"
                 editText_adresAdi.requestFocus()
@@ -104,6 +103,11 @@ class AddNewAddressActivity : AppCompatActivity() {
             }
 
             addNewAddress(address)
+        }
+
+        btn_back_to_address.setOnClickListener {
+            val intent = Intent(this, AddressActivity::class.java)
+            startActivity(intent)
         }
     }
 

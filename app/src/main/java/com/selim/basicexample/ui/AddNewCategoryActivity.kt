@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.FirebaseFirestore
 import com.selim.basicexample.R
 import com.selim.basicexample.model.CoffeeCategory
+import kotlinx.android.synthetic.main.activity_add_new_category.*
 
 class AddNewCategoryActivity : AppCompatActivity() {
     private val buttonAdd by lazy { findViewById<View>(R.id.btn_add_category_to_db) }
@@ -23,6 +24,19 @@ class AddNewCategoryActivity : AppCompatActivity() {
         firestore = FirebaseFirestore.getInstance()
 
         buttonAdd.setOnClickListener {
+
+            if(et_category_name.text.isEmpty())
+            {
+                et_category_name.error = "Kategori adını giriniz"
+                et_category_name.requestFocus()
+                return@setOnClickListener
+            }
+            if(et_image_url.text.isEmpty())
+            {
+                et_image_url.error = "Fotoğraf URLsi boş olamaz"
+                et_image_url.requestFocus()
+                return@setOnClickListener
+            }
             addNewCategory()
         }
     }

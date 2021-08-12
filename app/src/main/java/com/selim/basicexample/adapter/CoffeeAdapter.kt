@@ -32,7 +32,5 @@ class CoffeeAdapter(val coffeeList:ArrayList<Coffee>): RecyclerView.Adapter<Coff
     private fun getCoffeeCategory(categoryId:String):String
     {
         return MockData.getCoffeeCategories().find {it.id==categoryId}?.name.toString()
-
-
     }
 }

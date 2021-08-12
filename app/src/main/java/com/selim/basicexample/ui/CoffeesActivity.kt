@@ -27,11 +27,11 @@ class CoffeesActivity : AppCompatActivity() {
         val layoutManager = LinearLayoutManager(this)
         recycler_view_coffees.layoutManager = layoutManager
 
-        val coffeeAdapter = CoffeeAdapter(MockData.getCoffeeList())
-        recycler_view_coffees.adapter = coffeeAdapter
+        val categoryId = intent.getStringExtra("CATEGORY_ID") ?: ""
 
         fab_add_coffee.setOnClickListener {
             val intent = Intent(this, AddNewCoffeeActivity::class.java)
+            intent.putExtra("CATEGORY_ID", categoryId)
             startActivity(intent)
         }
 
@@ -40,7 +40,8 @@ class CoffeesActivity : AppCompatActivity() {
 
     private fun getCoffees()
     {
-        firebase?.collection("coffee")?.get()?.addOnSuccessListener { snapshot ->
+        val categoryId = intent.getStringExtra("CATEGORY_ID") ?: ""
+        firebase?.collection("category")?.document(categoryId)?.collection("coffees")?.get()?.addOnSuccessListener { snapshot ->
              val list = ArrayList<Coffee>()
              snapshot.documents.forEach{ documentSnapshot ->
                  documentSnapshot.toObject(Coffee::class.java)?.let { coffee ->

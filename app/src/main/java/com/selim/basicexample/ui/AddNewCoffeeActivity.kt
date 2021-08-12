@@ -1,13 +1,11 @@
 package com.selim.basicexample.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.FirebaseFirestore
 import com.selim.basicexample.R
 import com.selim.basicexample.data.MockData
@@ -19,7 +17,7 @@ import kotlinx.android.synthetic.main.coffee_item_row.*
 
 class AddNewCoffeeActivity : AppCompatActivity() {
 
-    private var selectedCategoryId:String=""
+    private var selectedCategoryId: String = ""
 
     private var firestore: FirebaseFirestore? = null
 
@@ -31,10 +29,14 @@ class AddNewCoffeeActivity : AppCompatActivity() {
         firestore = FirebaseFirestore.getInstance()
 
 
-        val adapter=ArrayAdapter(this,R.layout.support_simple_spinner_dropdown_item,MockData.getCoffeeCategories())
-        spinner.adapter=adapter
+        val adapter = ArrayAdapter(
+            this,
+            R.layout.support_simple_spinner_dropdown_item,
+            MockData.getCoffeeCategories()
+        )
+        spinner.adapter = adapter
 
-        spinner.onItemSelectedListener=object :AdapterView.OnItemSelectedListener{
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 view: View?,
@@ -43,7 +45,7 @@ class AddNewCoffeeActivity : AppCompatActivity() {
             ) {
                 //seçilen kahve kategorisinin idsini alma
                 var selectedCategory = spinner.selectedItem as CoffeeCategory
-                selectedCategoryId=selectedCategory.id
+                selectedCategoryId = selectedCategory.id
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -69,33 +71,33 @@ class AddNewCoffeeActivity : AppCompatActivity() {
         }
     }
 
-   private fun addNewCoffee()
-   {
-       var coffee=Coffee().apply {
-           name=editText_kahveAdi.text.toString()
-           price=editText_kahveFiyati.text.toString()
-           imageUrl=editText_kahveImageUrl.text.toString()
-           categoryId=selectedCategoryId
-       }
+    private fun addNewCoffee() {
+        val categoryId = intent.getStringExtra("CATEGORY_ID") ?: ""
 
-       firestore?.collection("coffee")?.add(coffee)?.addOnCompleteListener { task->
+        val coffee = Coffee().apply {
+            name = editText_kahveAdi.text.toString()
+            price = editText_kahveFiyati.text.toString()
+            imageUrl = editText_kahveImageUrl.text.toString()
+        }
 
-           when (task.isSuccessful) {
-               true -> {
-                   Toast.makeText(
-                           this,
-                           "${coffee.name} kahvesi Eklendi..",
-                           Toast.LENGTH_LONG
-                   ).show()
-                   finish()
-               }
-               false -> Toast.makeText(
-                       this,
-                       "${coffee.name} kahvesi Eklenemedi..",
-                       Toast.LENGTH_LONG
-               ).show()
-           }
-       }
+        firestore?.collection("category")?.document(categoryId)?.collection("coffees")?.add(coffee)?.addOnCompleteListener { task ->
 
-   }
+            when (task.isSuccessful) {
+                true -> {
+                    Toast.makeText(
+                        this,
+                        "${coffee.name} kahvesi Eklendi..",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    finish()
+                }
+                false -> Toast.makeText(
+                    this,
+                    "${coffee.name} kahvesi Eklenemedi..",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }
+
+    }
 }

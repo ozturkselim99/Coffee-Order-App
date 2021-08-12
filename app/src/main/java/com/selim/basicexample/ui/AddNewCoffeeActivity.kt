@@ -6,8 +6,12 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.EditText
+import android.widget.Toast
+import com.google.firebase.firestore.FirebaseFirestore
 import com.selim.basicexample.R
 import com.selim.basicexample.data.MockData
+import com.selim.basicexample.model.Coffee
 import com.selim.basicexample.model.CoffeeCategory
 import kotlinx.android.synthetic.main.activity_add_new_address.*
 import kotlinx.android.synthetic.main.activity_add_new_coffee.*
@@ -16,9 +20,16 @@ import kotlinx.android.synthetic.main.coffee_item_row.*
 class AddNewCoffeeActivity : AppCompatActivity() {
 
     private var selectedCategoryId:String=""
+
+    private var firestore: FirebaseFirestore? = null
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_new_coffee)
+
+        firestore = FirebaseFirestore.getInstance()
+
 
         val adapter=ArrayAdapter(this,R.layout.support_simple_spinner_dropdown_item,MockData.getCoffeeCategories())
         spinner.adapter=adapter
@@ -53,10 +64,38 @@ class AddNewCoffeeActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            Log.d("response",selectedCategoryId)
-            Log.d("response",editText_kahveFiyati.text.toString())
-            Log.d("response",editText_kahveAdi.text.toString())
+            addNewCoffee()
 
         }
     }
+
+   private fun addNewCoffee()
+   {
+       var coffee=Coffee().apply {
+           name=editText_kahveAdi.text.toString()
+           price=editText_kahveFiyati.text.toString()
+           imageUrl=editText_kahveImageUrl.text.toString()
+           categoryId=selectedCategoryId
+       }
+
+       firestore?.collection("coffee")?.add(coffee)?.addOnCompleteListener { task->
+
+           when (task.isSuccessful) {
+               true -> {
+                   Toast.makeText(
+                           this,
+                           "${coffee.name} kahvesi Eklendi..",
+                           Toast.LENGTH_LONG
+                   ).show()
+                   finish()
+               }
+               false -> Toast.makeText(
+                       this,
+                       "${coffee.name} kahvesi Eklenemedi..",
+                       Toast.LENGTH_LONG
+               ).show()
+           }
+       }
+
+   }
 }

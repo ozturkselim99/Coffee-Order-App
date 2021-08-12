@@ -2,6 +2,7 @@ package com.selim.basicexample
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -9,9 +10,11 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.selim.basicexample.model.Address
+import com.selim.basicexample.model.Coffee
 import com.selim.basicexample.ui.AddressActivity
 import com.selim.basicexample.ui.LoginActivity
 import kotlinx.android.synthetic.main.activity_add_new_address.*
+import kotlinx.android.synthetic.main.item_address.*
 
 // todo: selim
 class AddNewAddressActivity : AppCompatActivity() {
@@ -32,6 +35,21 @@ class AddNewAddressActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_new_address)
+
+        if (intent.hasExtra("address"))
+        {
+            val updateAddress=intent.getSerializableExtra("address") as Address
+            editText_adresAdi.setText(updateAddress.addressName)
+            editText_il.setText(updateAddress.city)
+            editText_ilce.setText(updateAddress.district)
+            editText_cadde.setText(updateAddress.avenue)
+            editText_mahalle.setText(updateAddress.neighborhood)
+            editText_sokak.setText(updateAddress.street)
+            editText_ickapi.setText(updateAddress.buildingNumber.toString())
+            editText_diskapi.setText(updateAddress.number.toString())
+            adresEkle.setText("GUNCELLE")
+        }
+
 
         auth = Firebase.auth
         firestore = FirebaseFirestore.getInstance()

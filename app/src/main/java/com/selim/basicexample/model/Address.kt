@@ -1,5 +1,7 @@
 package com.selim.basicexample.model
 
+import java.io.Serializable
+
 data class Address(
     var userId: String = "",
     var addressName: String = "",
@@ -10,4 +12,4 @@ data class Address(
     var street: String = "",
     var buildingNumber: Int = 0,
     var number: Int = 0
-)
+):Serializable

@@ -122,11 +122,6 @@ class AddNewAddressActivity : AppCompatActivity() {
 
             addNewAddress(address)
         }
-
-        btn_back_to_address.setOnClickListener {
-            val intent = Intent(this, AddressActivity::class.java)
-            startActivity(intent)
-        }
     }
 
     private fun addNewAddress(address: Address) {

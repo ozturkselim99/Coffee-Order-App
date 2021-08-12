@@ -20,11 +20,11 @@
         tools:layout_editor_absoluteX="16dp">
 
         <Button
-            android:id="@+id/btn_coffees"
+            android:id="@+id/btn_categories"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Kahveler"></Button>
+            android:text="Kategoriler"/>
 
         <Button
             android:id="@+id/btn_address"
@@ -32,14 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="2dp"
             android:layout_weight="1"
-            android:text="Adresler"></Button>
-
-        <Button
-            android:id="@+id/btn_categories"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Kategoriler"></Button>
+            android:text="Adresler"/>
 
     </LinearLayout>
 
@@ -76,7 +69,7 @@
         android:text="Total price"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"></TextView>
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <Button
         android:id="@+id/list"

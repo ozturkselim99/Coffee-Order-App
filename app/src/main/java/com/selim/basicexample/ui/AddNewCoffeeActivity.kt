@@ -17,8 +17,6 @@ import kotlinx.android.synthetic.main.coffee_item_row.*
 
 class AddNewCoffeeActivity : AppCompatActivity() {
 
-    private var selectedCategoryId: String = ""
-
     private var firestore: FirebaseFirestore? = null
 
 
@@ -26,10 +24,18 @@ class AddNewCoffeeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_new_coffee)
 
+        if(intent.hasExtra("coffee"))
+        {
+            val updateUser = intent.getSerializableExtra("coffee") as Coffee
+            editText_kahveAdi.setText(updateUser.name)
+            editText_kahveFiyati.setText(updateUser.price)
+            editText_kahveImageUrl.setText(updateUser.imageUrl)
+            btn_kahveEkle.setText("Güncelle")
+        }
+
         firestore = FirebaseFirestore.getInstance()
 
-
-        val adapter = ArrayAdapter(
+        /*val adapter = ArrayAdapter(
             this,
             R.layout.support_simple_spinner_dropdown_item,
             MockData.getCoffeeCategories()
@@ -52,7 +58,7 @@ class AddNewCoffeeActivity : AppCompatActivity() {
                 TODO("Not yet implemented")
             }
 
-        }
+        }*/
 
         btn_kahveEkle.setOnClickListener {
             if (editText_kahveAdi.text.isEmpty()) {
@@ -60,12 +66,18 @@ class AddNewCoffeeActivity : AppCompatActivity() {
                 editText_kahveAdi.requestFocus()
                 return@setOnClickListener
             }
+
             if (editText_kahveFiyati.text.isEmpty()) {
                 editText_kahveFiyati.error = "Kahve fiyatı boş geçilemez"
                 editText_kahveFiyati.requestFocus()
                 return@setOnClickListener
             }
-
+            if(editText_kahveImageUrl.text.isEmpty())
+            {
+                editText_kahveImageUrl.error = "Resim ekleyiniz"
+                editText_kahveImageUrl.requestFocus()
+                return@setOnClickListener
+            }
             addNewCoffee()
 
         }

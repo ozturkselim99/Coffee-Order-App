@@ -15,7 +15,7 @@ class BasketActivity : AppCompatActivity() {
         setContentView(R.layout.activity_basket)
 
         var _totalBasket:Double=0.0
-        val basketList=intent.getParcelableArrayListExtra<Coffee>("list")
+        val basketList=getIntent().getSerializableExtra("list") as ArrayList<Coffee>
 
         if (basketList != null) {
             basketList.forEach {

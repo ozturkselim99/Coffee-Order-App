@@ -154,7 +154,7 @@
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_ickapi"></TextView>
+        app:layout_constraintTop_toBottomOf="@+id/editText_ickapi"/>
 
     <EditText
         android:id="@+id/editText_diskapi"
@@ -173,17 +173,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText_diskapi"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <Button
-        android:id="@+id/btn_back_to_address"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:text="Geri Dön"
-        app:layout_constraintBottom_toBottomOf="@+id/adresEkle"
-        app:layout_constraintEnd_toStartOf="@+id/adresEkle"
-        app:layout_constraintTop_toTopOf="@+id/adresEkle" />
+        app:layout_constraintVertical_bias="1.0"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

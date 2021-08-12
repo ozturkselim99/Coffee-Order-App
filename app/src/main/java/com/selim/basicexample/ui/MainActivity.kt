@@ -26,7 +26,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.d("MainActivityLIFECYCLE", "onCreate")
-
         checkUser()
 
         //Sepette gösterilecek ürünler
@@ -74,10 +73,6 @@ class MainActivity : AppCompatActivity() {
 
         btn_address.setOnClickListener {
             val intent = Intent(this, AddressActivity::class.java)
-            startActivity(intent)
-        }
-        btn_coffees.setOnClickListener {
-            val intent = Intent(this, CoffeesActivity::class.java)
             startActivity(intent)
         }
 

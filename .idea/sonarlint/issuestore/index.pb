@@ -23,3 +23,7 @@ q
 Aapp/src/main/java/com/selim/basicexample/adapter/BasketAdapter.kt,f/2/f2fea035cbd2ecd71a12e137ec4be194758c40e4
 i
 9app/src/main/java/com/selim/basicexample/model/Address.kt,6/f/6f980f232f4060910620bb6e562f7c95e7de50ec
+r
+Bapp/src/main/java/com/selim/basicexample/adapter/AddressAdapter.kt,a/4/a44e6e8696f82019e913c840828db0f7288b710a
+n
+>app/src/main/java/com/selim/basicexample/ui/AddressActivity.kt,a/e/aeb09930087afd462812e9e61772dec95e14619c

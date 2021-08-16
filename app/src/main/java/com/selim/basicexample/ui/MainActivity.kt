@@ -10,21 +10,28 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.selim.basicexample.R
 import com.selim.basicexample.adapter.CategoryAdapter
+import com.selim.basicexample.adapter.CategoryMenuAdapter
 import com.selim.basicexample.adapter.CoffeeAdapter
 import com.selim.basicexample.adapter.CoffeeHomeAdapter
 import com.selim.basicexample.data.MockData
 import com.selim.basicexample.model.Coffee
+import com.selim.basicexample.model.CoffeeCategory
+import kotlinx.android.synthetic.main.activity_coffee_category.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     private var auth: FirebaseAuth? = null
     private val buttonSignOut: Button by lazy { findViewById(R.id.button_sign_out) }
+    var firestore: FirebaseFirestore? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        firestore = FirebaseFirestore.getInstance()
         Log.d("MainActivityLIFECYCLE", "onCreate")
         checkUser()
 
@@ -86,6 +93,32 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        getCategories()
+    }
+
+    private fun getCategories() {
+        firestore?.collection("category")?.get()?.addOnSuccessListener { snapshot ->
+            val list = arrayListOf<CoffeeCategory>()
+
+            snapshot.documents.forEach { documentSnapshot ->
+                documentSnapshot.toObject(CoffeeCategory::class.java)?.let { category ->
+                    category.id = documentSnapshot.id
+                    list.add(category)
+                }
+            }
+
+            loadCategories(list)
+
+        }
+    }
+
+    private fun loadCategories(list: ArrayList<CoffeeCategory>) {
+        val categoryMenuAdapter = CategoryMenuAdapter(this, list)
+        recycler_view_category.adapter = categoryMenuAdapter
+    }
+
     private fun getCoffeesAsCategory(categoryId: String) {
         //todo: selim firestore CoffeesActivity
     }
@@ -98,31 +131,5 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
     }
-
-    override fun onStart() {
-        super.onStart()
-        Log.d("MainActivityLIFECYCLE", "onStart")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.d("MainActivityLIFECYCLE", "onResume")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.d("MainActivityLIFECYCLE", "onPause")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.d("MainActivityLIFECYCLE", "onStop")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("MainActivityLIFECYCLE", "onDestroy")
-    }
-
 }
 

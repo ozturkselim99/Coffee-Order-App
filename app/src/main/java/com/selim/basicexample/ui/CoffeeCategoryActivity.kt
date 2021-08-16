@@ -27,6 +27,10 @@ class CoffeeCategoryActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+
+    }
+    override fun onResume() {
+        super.onResume()
         getCategories()
     }
 

@@ -47,7 +47,11 @@ class MainActivity : AppCompatActivity() {
         val gridLayoutManager = GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false)
         recycler_view_category.layoutManager = gridLayoutManager
 
-        val categoryAdapter = CategoryAdapter(MockData.getCoffeeCategories())
+        // todo: berkhan firestore çekelim CoffeeCategoryActivity
+        val categoryAdapter = CategoryAdapter(MockData.getCoffeeCategories()) { categoryId ->
+            getCoffeesAsCategory(categoryId)
+        }
+
         recycler_view_category.adapter = categoryAdapter
 
         //Adapter içindeki total değişkenimizi gözlemliyoruz. Değişkende bir değişiklik olduğunda activity_xml içindeki total_price textini değiştiriyoruz.
@@ -80,6 +84,10 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, CoffeeCategoryActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    private fun getCoffeesAsCategory(categoryId: String) {
+        //todo: selim firestore CoffeesActivity
     }
 
     private fun checkUser() {

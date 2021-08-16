@@ -23,6 +23,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/selim/basicexample/adapter/CategoryAdapter.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/selim/basicexample/adapter/CategoryMenuAdapter.kt">
           <value>
             <set />
@@ -168,12 +173,22 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../androidlivechatsdk-github/livechat/src/main/java/com/desk360/base/util/Utils.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../androidlivechatsdk-github/livechat/src/main/java/com/desk360/livechat/BindingExt.kt">
           <value>
             <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/../androidlivechatsdk-github/livechat/src/main/java/com/desk360/livechat/data/HeaderCompanyScreenModel.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../androidlivechatsdk-github/livechat/src/main/java/com/desk360/livechat/data/model/chatsettings/Data.kt">
           <value>
             <set />
           </value>
@@ -229,6 +244,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/../androidlivechatsdk-github/livechat/src/main/java/com/desk360/livechat/presentation/activity/livechat/LoginNewChatViewModel.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../androidlivechatsdk-github/livechat/src/main/java/com/desk360/livechat/presentation/activity/livechat/StartNewChatViewModel.kt">
           <value>
             <set />
           </value>

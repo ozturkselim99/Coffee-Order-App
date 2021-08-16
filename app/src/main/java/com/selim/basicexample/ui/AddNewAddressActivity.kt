@@ -96,6 +96,17 @@ class AddNewAddressActivity : AppCompatActivity() {
     }
 
     private fun updateAddress() {
+        address?.apply {
+            addressName = editText_adresAdi.text.toString()
+            avenue=editText_cadde.text.toString()
+            city = editText_il.text.toString()
+            district = editText_ilce.text.toString()
+            neighborhood = editText_mahalle.text.toString()
+            street = editText_sokak.text.toString()
+            number = editText_ickapi.text.toString().toInt()
+            buildingNumber = editText_diskapi.text.toString().toInt()
+        }
+
         auth?.currentUser?.uid?.let { userId ->
             firestore?.collection("user")?.whereEqualTo("userId", userId)
                 ?.addSnapshotListener { value, error ->
@@ -138,7 +149,7 @@ class AddNewAddressActivity : AppCompatActivity() {
 
     private fun addNewAddress() {
 
-        val address = Address().apply {
+        val newAddress = Address().apply {
             addressName = editText_adresAdi.text.toString()
             avenue=editText_cadde.text.toString()
             city = editText_il.text.toString()
@@ -153,13 +164,13 @@ class AddNewAddressActivity : AppCompatActivity() {
             firestore?.collection("user")?.whereEqualTo("userId", userId)
                 ?.addSnapshotListener { value, error ->
                     value?.documents?.firstOrNull()?.id?.let { documentId ->
-                        firestore?.collection("user/$documentId/address")?.add(address)
+                        firestore?.collection("user/$documentId/address")?.add(newAddress)
                             ?.addOnCompleteListener { task ->
                                 when (task.isSuccessful) {
                                     true -> {
                                         Toast.makeText(
                                             this@AddNewAddressActivity,
-                                            "${address.addressName} eklendi",
+                                            "${newAddress.addressName} eklendi",
                                             Toast.LENGTH_LONG
                                         ).show()
 
@@ -168,7 +179,7 @@ class AddNewAddressActivity : AppCompatActivity() {
                                     else -> {
                                         Toast.makeText(
                                             this@AddNewAddressActivity,
-                                            "${address.addressName} eklenemedi",
+                                            "${newAddress.addressName} eklenemedi",
                                             Toast.LENGTH_LONG
                                         ).show()
                                     }

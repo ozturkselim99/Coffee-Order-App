@@ -14,10 +14,14 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.selim.basicexample.R
 import com.selim.basicexample.adapter.CategoryAdapter
+import com.selim.basicexample.adapter.CategoryMenuAdapter
 import com.selim.basicexample.adapter.CoffeeAdapter
 import com.selim.basicexample.adapter.CoffeeHomeAdapter
 import com.selim.basicexample.data.MockData
+import com.selim.basicexample.data.MockData.getCoffeeCategories
 import com.selim.basicexample.model.Coffee
+import com.selim.basicexample.model.CoffeeCategory
+import kotlinx.android.synthetic.main.activity_coffee_category.*
 import kotlinx.android.synthetic.main.activity_coffees.*
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -27,7 +31,8 @@ class MainActivity : AppCompatActivity() {
     private val buttonSignOut: Button by lazy { findViewById(R.id.button_sign_out) }
     private var firebase: FirebaseFirestore? = null
     private var basketList= arrayListOf<Coffee>()
-   private var totalBasket: Double = 0.0
+    private var totalBasket: Double = 0.0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -44,19 +49,18 @@ class MainActivity : AppCompatActivity() {
         val layoutManager = LinearLayoutManager(this)
         recycler_view_product.layoutManager = layoutManager
 
-        val gridLayoutManager = GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false)
-        recycler_view_category.layoutManager = gridLayoutManager
-
         // todo: berkhan firestore çekelim CoffeeCategoryActivity
-        val categoryAdapter = CategoryAdapter(MockData.getCoffeeCategories()) { categoryId ->
-            getCoffeesAsCategory(categoryId)
+        /*val categoryAdapter = CategoryAdapter(list, ) {
+                categoryId -> getCoffeesAsCategory(categoryId)
         }
-
         recycler_view_category.adapter = categoryAdapter
 
+        Ben bu üstteki kodların mantığını anlamadım. Kategorilerin sabit kalması gerekmiyor mu? O yüzden adapter'ı loadCategories() içine yazdım.
 
+        */
 
         //Siparis listesine gitme ve veri yollama
+
         list.setOnClickListener {
             val intent = Intent(this, BasketActivity::class.java)
             intent.putExtra("list", basketList)
@@ -77,6 +81,32 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, CoffeeCategoryActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getCategories()
+    }
+
+    private fun getCategories() {
+        firebase?.collection("category")?.get()?.addOnSuccessListener { snapshot ->
+            val list = arrayListOf<CoffeeCategory>()
+
+            snapshot.documents.forEach { documentSnapshot ->
+                documentSnapshot.toObject(CoffeeCategory::class.java)?.let { category ->
+                    category.id = documentSnapshot.id
+                    list.add(category)
+                }
+            }
+            loadCategories(list)
+        }
+    }
+
+    private fun loadCategories(list: ArrayList<CoffeeCategory>) {
+        val gridLayoutManager = GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false)
+        recycler_view_category.layoutManager = gridLayoutManager
+        val categoryAdapter = CategoryAdapter(list)
+        recycler_view_category.adapter = categoryAdapter
     }
 
     private fun getCoffeesAsCategory(categoryId: String) {
@@ -115,31 +145,5 @@ class MainActivity : AppCompatActivity() {
             basketList = it
         })
     }
-
-    override fun onStart() {
-        super.onStart()
-        Log.d("MainActivityLIFECYCLE", "onStart")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.d("MainActivityLIFECYCLE", "onResume")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.d("MainActivityLIFECYCLE", "onPause")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.d("MainActivityLIFECYCLE", "onStop")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("MainActivityLIFECYCLE", "onDestroy")
-    }
-
 }
 

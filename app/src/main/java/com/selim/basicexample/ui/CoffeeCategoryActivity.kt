@@ -26,8 +26,6 @@ class CoffeeCategoryActivity : AppCompatActivity() {
             val intent = Intent(this, AddNewCategoryActivity::class.java)
             startActivity(intent)
         }
-
-
     }
     override fun onResume() {
         super.onResume()
@@ -51,7 +49,7 @@ class CoffeeCategoryActivity : AppCompatActivity() {
     }
 
     private fun loadCategories(list: ArrayList<CoffeeCategory>) {
-        val categoryMenuAdapter = CategoryMenuAdapter(this, list)
-        recycler_view_category_menu.adapter = categoryMenuAdapter
+        val categoryAdapter = CategoryMenuAdapter(this, list)
+        recycler_view_category_menu.adapter = categoryAdapter
     }
 }

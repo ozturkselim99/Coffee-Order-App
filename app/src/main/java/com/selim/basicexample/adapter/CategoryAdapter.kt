@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.item_category.view.*
 
 class CategoryAdapter(
     val categoryList: ArrayList<CoffeeCategory>,
-    private val categoryClick: (String) -> Unit
+    //private val categoryClick: (String) -> Unit
 ) : RecyclerView.Adapter<CategoryAdapter.CategoryVH>() {
     class CategoryVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     }
@@ -28,9 +28,9 @@ class CategoryAdapter(
             .into(holder.itemView.image_view_category)
         holder.itemView.text_view_category_name.text = category.name
 
-        holder.itemView.setOnClickListener {
+        /*holder.itemView.setOnClickListener {
             categoryClick(category.id)
-        }
+        }*/
     }
 
     override fun getItemCount() = categoryList.size

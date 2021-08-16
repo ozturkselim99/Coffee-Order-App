@@ -44,17 +44,33 @@ class AddressActivity : AppCompatActivity() {
         auth?.currentUser?.uid?.let { userId ->
             firestore?.collection("user")?.whereEqualTo("userId", userId)
                 ?.addSnapshotListener { value, error ->
-                    value?.documents?.firstOrNull()?.let { document ->
-                        document.reference.collection("address")
-                            .addSnapshotListener { value, error ->
 
-                                value?.toObjects(Address::class.java)?.let { list ->
-                                    val addressAdapter = AddressAdapter(list)
-                                    recycler_view_address.adapter = addressAdapter
+                    value?.documents?.firstOrNull()?.let { userDocumentId ->
+
+                        userDocumentId.reference.collection("address")
+                            .addSnapshotListener { snapshots, error ->
+
+                                val addresses = arrayListOf<Address>()
+
+                                snapshots?.documents?.forEach { snapshot ->
+                                    snapshot.toObject(Address::class.java)
+                                        ?.let { address ->
+                                            address.id = snapshot.id
+                                            addresses.add(address)
+                                        }
                                 }
+
+                                loadAddresses(addresses)
                             }
+
+
                     }
                 }
         }
+    }
+
+    private fun loadAddresses(addresses: ArrayList<Address>) {
+        val addressAdapter = AddressAdapter(addresses)
+        recycler_view_address.adapter = addressAdapter
     }
 }

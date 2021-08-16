@@ -28,7 +28,17 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/selim/basicexample/adapter/CoffeeAdapter.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/selim/basicexample/model/Address.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/selim/basicexample/model/Coffee.kt">
           <value>
             <set />
           </value>

@@ -2,7 +2,6 @@ package com.selim.basicexample
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -10,8 +9,6 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.selim.basicexample.model.Address
-import com.selim.basicexample.model.Coffee
-import com.selim.basicexample.ui.AddressActivity
 import com.selim.basicexample.ui.LoginActivity
 import kotlinx.android.synthetic.main.activity_add_new_address.*
 import kotlinx.android.synthetic.main.item_address.*
@@ -21,6 +18,7 @@ class AddNewAddressActivity : AppCompatActivity() {
 
     var auth: FirebaseAuth? = null
     var firestore: FirebaseFirestore? = null
+    var address: Address? = null
 
     override fun onResume() {
         super.onResume()
@@ -36,24 +34,15 @@ class AddNewAddressActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_new_address)
 
-        if (intent.hasExtra("address"))
-        {
-            val updateAddress=intent.getSerializableExtra("address") as Address
-            editText_adresAdi.setText(updateAddress.addressName)
-            editText_il.setText(updateAddress.city)
-            editText_ilce.setText(updateAddress.district)
-            editText_cadde.setText(updateAddress.avenue)
-            editText_mahalle.setText(updateAddress.neighborhood)
-            editText_sokak.setText(updateAddress.street)
-            editText_ickapi.setText(updateAddress.buildingNumber.toString())
-            editText_diskapi.setText(updateAddress.number.toString())
-            adresEkle.setText("GUNCELLE")
+        address = intent.getSerializableExtra("address") as Address?
+
+        address?.let {
+            bindAddress()
         }
 
 
         auth = Firebase.auth
         firestore = FirebaseFirestore.getInstance()
-        val address = Address()
 
         adresEkle.setOnClickListener {
             if (editText_adresAdi.text.isEmpty()) {
@@ -61,7 +50,7 @@ class AddNewAddressActivity : AppCompatActivity() {
                 editText_adresAdi.requestFocus()
                 return@setOnClickListener
             } else {
-                address.addressName = editText_adresAdi.text.toString()
+                address?.addressName = editText_adresAdi.text.toString()
             }
 
             if (editText_cadde.text.isEmpty()) {
@@ -69,7 +58,7 @@ class AddNewAddressActivity : AppCompatActivity() {
                 editText_cadde.requestFocus()
                 return@setOnClickListener
             } else {
-                address.avenue = editText_cadde.text.toString()
+                address?.avenue = editText_cadde.text.toString()
             }
 
             if (editText_il.text.isEmpty()) {
@@ -77,7 +66,7 @@ class AddNewAddressActivity : AppCompatActivity() {
                 editText_il.requestFocus()
                 return@setOnClickListener
             } else {
-                address.city = editText_il.text.toString()
+                address?.city = editText_il.text.toString()
             }
 
             if (editText_ilce.text.isEmpty()) {
@@ -85,7 +74,7 @@ class AddNewAddressActivity : AppCompatActivity() {
                 editText_ilce.requestFocus()
                 return@setOnClickListener
             } else {
-                address.district = editText_ilce.text.toString()
+                address?.district = editText_ilce.text.toString()
             }
 
             if (editText_mahalle.text.isEmpty()) {
@@ -93,7 +82,7 @@ class AddNewAddressActivity : AppCompatActivity() {
                 editText_mahalle.requestFocus()
                 return@setOnClickListener
             } else {
-                address.neighborhood = editText_mahalle.text.toString()
+                address?.neighborhood = editText_mahalle.text.toString()
             }
 
             if (editText_sokak.text.isEmpty()) {
@@ -101,7 +90,7 @@ class AddNewAddressActivity : AppCompatActivity() {
                 editText_sokak.requestFocus()
                 return@setOnClickListener
             } else {
-                address.street = editText_sokak.text.toString()
+                address?.street = editText_sokak.text.toString()
             }
 
             if (editText_ickapi.text.isEmpty()) {
@@ -109,7 +98,7 @@ class AddNewAddressActivity : AppCompatActivity() {
                 editText_ickapi.requestFocus()
                 return@setOnClickListener
             } else {
-                address.number = editText_ickapi.text.toString().toInt()
+                address?.number = editText_ickapi.text.toString().toInt()
             }
 
             if (editText_diskapi.text.isEmpty()) {
@@ -117,11 +106,40 @@ class AddNewAddressActivity : AppCompatActivity() {
                 editText_diskapi.requestFocus()
                 return@setOnClickListener
             } else {
-                address.buildingNumber = editText_diskapi.text.toString().toInt()
+                address?.buildingNumber = editText_diskapi.text.toString().toInt()
             }
 
-            addNewAddress(address)
+            if (address == null) {
+                addNewAddress(address!!)
+
+            } else {
+                updateAddress()
+            }
         }
+    }
+
+    private fun updateAddress() {
+        auth?.currentUser?.uid?.let { userId ->
+            firestore?.collection("user")?.whereEqualTo("userId", userId)
+                ?.addSnapshotListener { value, error ->
+                    value?.documents?.firstOrNull()?.id?.let { documentId ->
+                        firestore?.collection("user/$documentId/address")?.document(address?.id!!)
+                            ?.set(address!!)
+                    }
+                }
+        }
+    }
+
+    private fun bindAddress() {
+        editText_adresAdi.setText(address?.addressName)
+        editText_il.setText(address?.city)
+        editText_ilce.setText(address?.district)
+        editText_cadde.setText(address?.avenue)
+        editText_mahalle.setText(address?.neighborhood)
+        editText_sokak.setText(address?.street)
+        editText_ickapi.setText(address?.buildingNumber.toString())
+        editText_diskapi.setText(address?.number.toString())
+        adresEkle.setText("GUNCELLE")
     }
 
     private fun addNewAddress(address: Address) {

@@ -3,6 +3,7 @@ package com.selim.basicexample.model
 import java.io.Serializable
 
 data class Address(
+    var id:String = "",
     var userId: String = "",
     var addressName: String = "",
     var city: String = "",

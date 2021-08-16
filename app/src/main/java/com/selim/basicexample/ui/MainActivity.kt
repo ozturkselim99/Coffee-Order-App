@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.selim.basicexample.R
 import com.selim.basicexample.adapter.CategoryAdapter
@@ -17,22 +18,24 @@ import com.selim.basicexample.adapter.CoffeeAdapter
 import com.selim.basicexample.adapter.CoffeeHomeAdapter
 import com.selim.basicexample.data.MockData
 import com.selim.basicexample.model.Coffee
+import kotlinx.android.synthetic.main.activity_coffees.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     private var auth: FirebaseAuth? = null
     private val buttonSignOut: Button by lazy { findViewById(R.id.button_sign_out) }
+    private var firebase: FirebaseFirestore? = null
+    private var basketList= arrayListOf<Coffee>()
+   private var totalBasket: Double = 0.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        firebase = FirebaseFirestore.getInstance()
         Log.d("MainActivityLIFECYCLE", "onCreate")
         checkUser()
-
-        //Sepette gösterilecek ürünler
-        var basketList = arrayListOf<Coffee>()
-
-        //Toplam sepet miktarı
-        var totalBasket: Double = 0.0
+        //örnek kategori id
+        getCoffeesAsCategory("K0xlIQUECx8adOELyJay")
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -40,9 +43,6 @@ class MainActivity : AppCompatActivity() {
         //Adapter
         val layoutManager = LinearLayoutManager(this)
         recycler_view_product.layoutManager = layoutManager
-
-        val coffeeAdapter = CoffeeHomeAdapter(MockData.getCoffeeList())
-        recycler_view_product.adapter = coffeeAdapter
 
         val gridLayoutManager = GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false)
         recycler_view_category.layoutManager = gridLayoutManager
@@ -54,14 +54,7 @@ class MainActivity : AppCompatActivity() {
 
         recycler_view_category.adapter = categoryAdapter
 
-        //Adapter içindeki total değişkenimizi gözlemliyoruz. Değişkende bir değişiklik olduğunda activity_xml içindeki total_price textini değiştiriyoruz.
-        coffeeAdapter.total.observe(this, Observer {
-            total_price.text = "Toplam Tutar: " + it.toString() + "₺"
-            totalBasket = it
-        })
-        coffeeAdapter.basket.observe(this, Observer {
-            basketList = it
-        })
+
 
         //Siparis listesine gitme ve veri yollama
         list.setOnClickListener {
@@ -88,6 +81,16 @@ class MainActivity : AppCompatActivity() {
 
     private fun getCoffeesAsCategory(categoryId: String) {
         //todo: selim firestore CoffeesActivity
+        firebase?.collection("category")?.document(categoryId)?.collection("coffees")?.addSnapshotListener { snapshot, error ->
+            val list = ArrayList<Coffee>()
+            snapshot?.documents?.forEach { documentSnapshot ->
+                documentSnapshot.toObject(Coffee::class.java)?.let { coffee ->
+                    coffee.id = documentSnapshot.id
+                    list.add(coffee)
+                }
+            }
+            loadCoffees(list)
+        }
     }
 
     private fun checkUser() {
@@ -97,6 +100,20 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
+    }
+
+    private fun loadCoffees(list: ArrayList<Coffee>) {
+        val coffeeAdapter = CoffeeHomeAdapter(list)
+        recycler_view_product.adapter = coffeeAdapter
+
+        //Adapter içindeki total değişkenimizi gözlemliyoruz. Değişkende bir değişiklik olduğunda activity_xml içindeki total_price textini değiştiriyoruz.
+        coffeeAdapter.total.observe(this, Observer {
+            total_price.text = "Toplam Tutar: " + it.toString() + "₺"
+            totalBasket = it
+        })
+        coffeeAdapter.basket.observe(this, Observer {
+            basketList = it
+        })
     }
 
     override fun onStart() {

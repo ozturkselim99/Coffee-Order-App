@@ -7,7 +7,7 @@ data class Address(
     var userId: String = "",
     var addressName: String = "",
     var city: String = "",
-    var district: String = "",
+    var state: String = "",
     var avenue: String = "",
     var neighborhood: String = "",
     var street: String = "",

@@ -1,6 +1,8 @@
 package com.selim.basicexample.ui
 
 import android.os.Bundle
+import android.view.View
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.FirebaseFirestore
@@ -16,6 +18,9 @@ class AddNewCoffeeActivity : AppCompatActivity() {
 
     private var coffee: Coffee? = null
     private var categoryId: String = ""
+    private val etCoffeeName by lazy { findViewById<EditText>(R.id.editText_kahveAdi) }
+    private val etCoffeePrice by lazy {findViewById<EditText>(R.id.editText_kahveFiyati) }
+    private val etCoffeeImg by lazy {findViewById<EditText>(R.id.editText_kahveImageUrl) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,20 +36,20 @@ class AddNewCoffeeActivity : AppCompatActivity() {
         firestore = FirebaseFirestore.getInstance()
 
         btn_kahveEkle.setOnClickListener {
-            if (editText_kahveAdi.text.isEmpty()) {
-                editText_kahveAdi.error = "Kahve adı boş geçilemez"
-                editText_kahveAdi.requestFocus()
+            if (etCoffeeName.text.isEmpty()) {
+                etCoffeeName.error = "Kahve adı boş geçilemez"
+                etCoffeeName.requestFocus()
                 return@setOnClickListener
             }
 
-            if (editText_kahveFiyati.text.isEmpty()) {
-                editText_kahveFiyati.error = "Kahve fiyatı boş geçilemez"
-                editText_kahveFiyati.requestFocus()
+            if (etCoffeePrice.text.isEmpty()) {
+                etCoffeePrice.error = "Kahve fiyatı boş geçilemez"
+                etCoffeePrice.requestFocus()
                 return@setOnClickListener
             }
-            if (editText_kahveImageUrl.text.isEmpty()) {
-                editText_kahveImageUrl.error = "Resim ekleyiniz"
-                editText_kahveImageUrl.requestFocus()
+            if (etCoffeeImg.text.isEmpty()) {
+                etCoffeeImg.error = "Resim ekleyiniz"
+                etCoffeeImg.requestFocus()
                 return@setOnClickListener
             }
 
@@ -61,9 +66,9 @@ class AddNewCoffeeActivity : AppCompatActivity() {
         coffee?.id?.let { coffeeId ->
 
             coffee?.apply {
-                name = editText_kahveAdi.text.toString()
-                price = editText_kahveFiyati.text.toString()
-                imageUrl = editText_kahveImageUrl.text.toString()
+                name = etCoffeeName.text.toString()
+                price = etCoffeePrice.text.toString()
+                imageUrl = etCoffeeImg.text.toString()
             }
 
             firestore?.collection("category")?.document(categoryId)?.collection("coffees")

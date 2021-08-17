@@ -2,7 +2,8 @@ package com.selim.basicexample
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -10,7 +11,6 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.selim.basicexample.model.Address
-import com.selim.basicexample.model.CoffeeCategory
 import com.selim.basicexample.ui.LoginActivity
 import kotlinx.android.synthetic.main.activity_add_new_address.*
 import kotlinx.android.synthetic.main.item_address.*
@@ -21,6 +21,15 @@ class AddNewAddressActivity : AppCompatActivity() {
     private var auth: FirebaseAuth? = null
     private var firestore: FirebaseFirestore? = null
     private var address: Address? = null
+    private val etAddressName: EditText by lazy { findViewById(R.id.editText_adresAdi) }
+    private val etAvenue: EditText by lazy { findViewById(R.id.editText_cadde) }
+    private val etCity: EditText by lazy { findViewById(R.id.editText_il) }
+    private val etState: EditText by lazy { findViewById(R.id.editText_ilce) }
+    private val etNeighborhood: EditText by lazy { findViewById(R.id.editText_mahalle) }
+    private val etStreet: EditText by lazy { findViewById(R.id.editText_sokak) }
+    private val etInNumber: EditText by lazy { findViewById(R.id.editText_ickapi) }
+    private val etOutNumber: EditText by lazy { findViewById(R.id.editText_diskapi) }
+    private val btnAddAddress: Button by lazy { findViewById(R.id.adresEkle) }
 
     override fun onResume() {
         super.onResume()
@@ -45,45 +54,45 @@ class AddNewAddressActivity : AppCompatActivity() {
         auth = Firebase.auth
         firestore = FirebaseFirestore.getInstance()
 
-        adresEkle.setOnClickListener {
-            if (editText_adresAdi.text.isEmpty()) {
-                editText_adresAdi.error = "Adres adı boş geçilemez"
-                editText_adresAdi.requestFocus()
+        btnAddAddress.setOnClickListener {
+            if (etAddressName.text.isEmpty()) {
+                etAddressName.error = "Adres adı boş geçilemez"
+                etAddressName.requestFocus()
                 return@setOnClickListener
             }
-            if (editText_cadde.text.isEmpty()) {
-                editText_cadde.error = "Cadde adı boş geçilemez"
-                editText_cadde.requestFocus()
+            if (etAvenue.text.isEmpty()) {
+                etAvenue.error = "Cadde adı boş geçilemez"
+                etAvenue.requestFocus()
                 return@setOnClickListener
             }
-            if (editText_il.text.isEmpty()) {
-                editText_il.error = "İl adı boş geçilemez"
-                editText_il.requestFocus()
+            if (etCity.text.isEmpty()) {
+                etCity.error = "İl adı boş geçilemez"
+                etCity.requestFocus()
                 return@setOnClickListener
             }
-            if (editText_ilce.text.isEmpty()) {
-                editText_ilce.error = "İlçe adı boş geçilemez"
-                editText_ilce.requestFocus()
+            if (etState.text.isEmpty()) {
+                etState.error = "İlçe adı boş geçilemez"
+                etState.requestFocus()
                 return@setOnClickListener
             }
-            if (editText_mahalle.text.isEmpty()) {
-                editText_mahalle.error = "Mahalle adı boş geçilemez"
-                editText_mahalle.requestFocus()
+            if (etNeighborhood.text.isEmpty()) {
+                etNeighborhood.error = "Mahalle adı boş geçilemez"
+                etNeighborhood.requestFocus()
                 return@setOnClickListener
             }
-            if (editText_sokak.text.isEmpty()) {
-                editText_sokak.error = "Sokak adı boş geçilemez"
-                editText_sokak.requestFocus()
+            if (etStreet.text.isEmpty()) {
+                etStreet.error = "Sokak adı boş geçilemez"
+                etStreet.requestFocus()
                 return@setOnClickListener
             }
-            if (editText_ickapi.text.isEmpty()) {
-                editText_ickapi.error = "İç kapı numarası boş geçilemez"
-                editText_ickapi.requestFocus()
+            if (etInNumber.text.isEmpty()) {
+                etInNumber.error = "İç kapı numarası boş geçilemez"
+                etInNumber.requestFocus()
                 return@setOnClickListener
             }
-            if (editText_diskapi.text.isEmpty()) {
-                editText_diskapi.error = "Dış kapı numarası boş geçilemez"
-                editText_diskapi.requestFocus()
+            if (etOutNumber.text.isEmpty()) {
+                etOutNumber.error = "Dış kapı numarası boş geçilemez"
+                etOutNumber.requestFocus()
                 return@setOnClickListener
             }
 
@@ -97,14 +106,14 @@ class AddNewAddressActivity : AppCompatActivity() {
 
     private fun updateAddress() {
         address?.apply {
-            addressName = editText_adresAdi.text.toString()
-            avenue=editText_cadde.text.toString()
-            city = editText_il.text.toString()
-            district = editText_ilce.text.toString()
-            neighborhood = editText_mahalle.text.toString()
-            street = editText_sokak.text.toString()
-            number = editText_ickapi.text.toString().toInt()
-            buildingNumber = editText_diskapi.text.toString().toInt()
+            addressName = etAddressName.text.toString()
+            avenue=etAvenue.text.toString()
+            city = etCity.text.toString()
+            state = etState.text.toString()
+            neighborhood = etNeighborhood.text.toString()
+            street = etStreet.text.toString()
+            number = etInNumber.text.toString().toInt()
+            buildingNumber = etOutNumber.text.toString().toInt()
         }
 
         auth?.currentUser?.uid?.let { userId ->
@@ -136,28 +145,28 @@ class AddNewAddressActivity : AppCompatActivity() {
     }
 
     private fun bindAddress() {
-        editText_adresAdi.setText(address?.addressName)
-        editText_il.setText(address?.city)
-        editText_ilce.setText(address?.district)
-        editText_cadde.setText(address?.avenue)
-        editText_mahalle.setText(address?.neighborhood)
-        editText_sokak.setText(address?.street)
-        editText_ickapi.setText(address?.buildingNumber.toString())
-        editText_diskapi.setText(address?.number.toString())
-        adresEkle.setText("GUNCELLE")
+        etAddressName.setText(address?.addressName)
+        etCity.setText(address?.city)
+        etState.setText(address?.state)
+        etAvenue.setText(address?.avenue)
+        etNeighborhood.setText(address?.neighborhood)
+        etStreet.setText(address?.street)
+        etOutNumber.setText(address?.buildingNumber.toString())
+        etInNumber.setText(address?.number.toString())
+        btnAddAddress.setText("GUNCELLE")
     }
 
     private fun addNewAddress() {
 
         val newAddress = Address().apply {
-            addressName = editText_adresAdi.text.toString()
-            avenue=editText_cadde.text.toString()
-            city = editText_il.text.toString()
-            district = editText_ilce.text.toString()
-            neighborhood = editText_mahalle.text.toString()
-            street = editText_sokak.text.toString()
-            number = editText_ickapi.text.toString().toInt()
-            buildingNumber = editText_diskapi.text.toString().toInt()
+            addressName = etAddressName.text.toString()
+            avenue=etAvenue.text.toString()
+            city = etCity.text.toString()
+            state = etState.text.toString()
+            neighborhood = etNeighborhood.text.toString()
+            street = etStreet.text.toString()
+            number = etInNumber.text.toString().toInt()
+            buildingNumber = etOutNumber.text.toString().toInt()
         }
 
         auth?.currentUser?.uid?.let { userId ->

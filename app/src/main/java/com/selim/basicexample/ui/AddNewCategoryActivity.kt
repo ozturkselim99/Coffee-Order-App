@@ -31,10 +31,10 @@ class AddNewCategoryActivity : AppCompatActivity() {
                 editTextCategoryName.requestFocus()
                 return@setOnClickListener
             }
-            if(et_image_url.text.isEmpty())
+            if(editTextUrl.text.isEmpty())
             {
-                et_image_url.error = "Fotoğraf URLsi boş olamaz"
-                et_image_url.requestFocus()
+                editTextUrl.error = "Fotoğraf URLsi boş olamaz"
+                editTextUrl.requestFocus()
                 return@setOnClickListener
             }
             addNewCategory()

@@ -2,6 +2,7 @@ package com.selim.basicexample.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +18,8 @@ class LoginActivity : AppCompatActivity() {
 
     private val emailAddressEdittextView by lazy { findViewById<EditText>(R.id.login_et_mail) }
     private val passwordEdittextView by lazy { findViewById<EditText>(R.id.login_et_password) }
+    private val buttonLogin by lazy { findViewById<Button>(R.id.btn_login) }
+    private val buttonLoginToRegister by lazy { findViewById<Button>(R.id.btn_login_to_register) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,17 +27,17 @@ class LoginActivity : AppCompatActivity() {
 
         auth = Firebase.auth
 
-        btn_login.setOnClickListener {
-            if(login_et_mail.text.isEmpty())
+        buttonLogin.setOnClickListener {
+            if(emailAddressEdittextView.text.isEmpty())
             {
-                login_et_mail.error = "Email adresinizi giriniz"
-                login_et_mail.requestFocus()
+                emailAddressEdittextView.error = "Email adresinizi giriniz"
+                emailAddressEdittextView.requestFocus()
                 return@setOnClickListener
             }
-            if(login_et_password.text.isEmpty())
+            if(passwordEdittextView.text.isEmpty())
             {
-                login_et_password.error = "Parolanızı giriniz"
-                login_et_password.requestFocus()
+                passwordEdittextView.error = "Parolanızı giriniz"
+                passwordEdittextView.requestFocus()
                 return@setOnClickListener
             }
 
@@ -58,7 +61,7 @@ class LoginActivity : AppCompatActivity() {
                 }
         }
 
-        btn_login_to_register.setOnClickListener {
+        buttonLoginToRegister.setOnClickListener {
             val intent = Intent(this, AddNewUserActivity::class.java)
             startActivity(intent)
         }

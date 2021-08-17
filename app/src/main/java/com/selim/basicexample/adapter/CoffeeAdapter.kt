@@ -8,15 +8,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
 import com.selim.basicexample.R
-import com.selim.basicexample.data.MockData
 import com.selim.basicexample.model.Coffee
-import com.selim.basicexample.model.CoffeeCategory
 import com.selim.basicexample.ui.AddNewCoffeeActivity
-import kotlinx.android.synthetic.main.coffee_item_row.*
-import kotlinx.android.synthetic.main.coffee_item_row.view.*
 
 class CoffeeAdapter(private val categoryId:String, private val coffeeList:ArrayList<Coffee>): RecyclerView.Adapter<CoffeeAdapter.CoffeeVH>() {
 
@@ -45,7 +39,7 @@ class CoffeeAdapter(private val categoryId:String, private val coffeeList:ArrayL
     override fun onBindViewHolder(holder: CoffeeVH, position: Int) {
         holder.bind(coffeeList[position])
 
-        holder.itemView.item_coffee.setOnClickListener {
+        holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView.context, AddNewCoffeeActivity::class.java)
             intent.putExtra("COFFEE", coffeeList[position])
             intent.putExtra("CATEGORY_ID", categoryId)

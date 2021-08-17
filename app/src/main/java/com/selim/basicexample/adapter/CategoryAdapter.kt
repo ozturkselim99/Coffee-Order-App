@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.selim.basicexample.R
 import com.selim.basicexample.model.CoffeeCategory
-import kotlinx.android.synthetic.main.item_category.view.*
 
 class CategoryAdapter(
         private val categoryList: ArrayList<CoffeeCategory>,

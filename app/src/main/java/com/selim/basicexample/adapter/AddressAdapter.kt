@@ -20,7 +20,7 @@ class AddressAdapter(private val addressList: MutableList<Address>) :
         fun bind(address: Address) {
             addressName.text = address.addressName
             addressInfo.text =
-                address.city + " " + address.district + " " +
+                address.city + " " + address.state + " " +
                         address.avenue + " " + address.neighborhood + " " + address.street + " " +
                         address.buildingNumber + " " + address.number
 

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreException
@@ -17,6 +18,8 @@ class CoffeesActivity : AppCompatActivity() {
 
     var firebase: FirebaseFirestore? = null
     private var categoryId: String = ""
+    private val recyclerViewCoffees by lazy { findViewById<RecyclerView>(R.id.recycler_view_coffees) }
+    private val fabAddCoffeeButton by lazy { findViewById<RecyclerView>(R.id.fab_add_coffee) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,11 +29,11 @@ class CoffeesActivity : AppCompatActivity() {
         firebase = FirebaseFirestore.getInstance()
 
         val layoutManager = LinearLayoutManager(this)
-        recycler_view_coffees.layoutManager = layoutManager
+        recyclerViewCoffees.layoutManager = layoutManager
 
         val categoryId = intent.getStringExtra("CATEGORY_ID") ?: ""
 
-        fab_add_coffee.setOnClickListener {
+        fabAddCoffeeButton.setOnClickListener {
             val intent = Intent(this, AddNewCoffeeActivity::class.java)
             intent.putExtra("CATEGORY_ID", categoryId)
             startActivity(intent)
@@ -59,7 +62,7 @@ class CoffeesActivity : AppCompatActivity() {
 
     private fun loadCoffees(list: ArrayList<Coffee>) {
         val coffeeAdapter = CoffeeAdapter(categoryId, list)
-        recycler_view_coffees.adapter = coffeeAdapter
+        recyclerViewCoffees.adapter = coffeeAdapter
     }
 
 

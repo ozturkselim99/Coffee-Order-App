@@ -2,8 +2,10 @@ package com.selim.basicexample.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
 import com.selim.basicexample.R
 import com.selim.basicexample.adapter.CategoryMenuAdapter
@@ -12,6 +14,8 @@ import kotlinx.android.synthetic.main.activity_coffee_category.*
 
 class CoffeeCategoryActivity : AppCompatActivity() {
     var firestore: FirebaseFirestore? = null
+    private val recyclerViewCategoryMenu by lazy { findViewById<RecyclerView>(R.id.recycler_view_category_menu) }
+    private val fabAddCategoryButton by lazy { findViewById<Button>(R.id.fab_add_category) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,9 +24,9 @@ class CoffeeCategoryActivity : AppCompatActivity() {
         firestore = FirebaseFirestore.getInstance()
 
         val linearLayout = LinearLayoutManager(this)
-        recycler_view_category_menu.layoutManager = linearLayout
+        recyclerViewCategoryMenu.layoutManager = linearLayout
 
-        fab_add_category.setOnClickListener {
+        fabAddCategoryButton.setOnClickListener {
             val intent = Intent(this, AddNewCategoryActivity::class.java)
             startActivity(intent)
         }
@@ -50,6 +54,6 @@ class CoffeeCategoryActivity : AppCompatActivity() {
 
     private fun loadCategories(list: ArrayList<CoffeeCategory>) {
         val categoryAdapter = CategoryMenuAdapter(this, list)
-        recycler_view_category_menu.adapter = categoryAdapter
+        recyclerViewCategoryMenu.adapter = categoryAdapter
     }
 }

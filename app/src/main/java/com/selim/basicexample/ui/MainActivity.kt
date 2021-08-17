@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -29,6 +30,11 @@ class MainActivity : AppCompatActivity() {
 
     private var auth: FirebaseAuth? = null
     private val buttonSignOut: Button by lazy { findViewById(R.id.button_sign_out) }
+    private val buttonAddress: Button by lazy { findViewById(R.id.btn_address) }
+    private val buttonCategories: Button by lazy { findViewById(R.id.btn_categories) }
+    private val recyclerViewProduct: RecyclerView by lazy { findViewById(R.id.recycler_view_product) }
+    private val recyclerViewCategory: RecyclerView by lazy { findViewById(R.id.recycler_view_category) }
+
     private var firebase: FirebaseFirestore? = null
     private var basketList= arrayListOf<Coffee>()
     private var totalBasket: Double = 0.0
@@ -47,7 +53,7 @@ class MainActivity : AppCompatActivity() {
 
         //Adapter
         val layoutManager = LinearLayoutManager(this)
-        recycler_view_product.layoutManager = layoutManager
+        recyclerViewProduct.layoutManager = layoutManager
 
         //Siparis listesine gitme ve veri yollama
 
@@ -62,12 +68,12 @@ class MainActivity : AppCompatActivity() {
             checkUser()
         }
 
-        btn_address.setOnClickListener {
+        buttonAddress.setOnClickListener {
             val intent = Intent(this, AddressActivity::class.java)
             startActivity(intent)
         }
 
-        btn_categories.setOnClickListener {
+        buttonCategories.setOnClickListener {
             val intent = Intent(this, CoffeeCategoryActivity::class.java)
             startActivity(intent)
         }
@@ -94,11 +100,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun loadCategories(list: ArrayList<CoffeeCategory>) {
         val gridLayoutManager = GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false)
-        recycler_view_category.layoutManager = gridLayoutManager
+        recyclerViewCategory.layoutManager = gridLayoutManager
         val categoryAdapter = CategoryAdapter(list){ categoryId ->
             getCoffeesAsCategory(categoryId)
         }
-        recycler_view_category.adapter = categoryAdapter
+        recyclerViewCategory.adapter = categoryAdapter
     }
 
     private fun getCoffeesAsCategory(categoryId: String) {
@@ -125,7 +131,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun loadCoffees(list: ArrayList<Coffee>) {
         val coffeeAdapter = CoffeeHomeAdapter(list)
-        recycler_view_product.adapter = coffeeAdapter
+        recyclerViewProduct.adapter = coffeeAdapter
 
         //Adapter içindeki total değişkenimizi gözlemliyoruz. Değişkende bir değişiklik olduğunda activity_xml içindeki total_price textini değiştiriyoruz.
         coffeeAdapter.total.observe(this, Observer {

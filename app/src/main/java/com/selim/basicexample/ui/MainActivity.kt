@@ -126,13 +126,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadCoffees(list: ArrayList<Coffee>) {
-        val coffeeAdapter = CoffeeHomeAdapter(list, {
-            totalPriceTextView.text = "Toplam Tutar: " + it.toString() + "₺"
-            totalBasket = it
-        }, {
-            basketList = it
-        })
-        recyclerViewProduct.adapter = coffeeAdapter
+
     }
 }
 

@@ -11,8 +11,7 @@ import com.selim.basicexample.model.Coffee
 
 class CoffeeHomeAdapter(
     private val coffeeList: ArrayList<Coffee>,
-    private var totalAmount: (Double) -> Unit,
-    private var basketList: (ArrayList<Coffee>) -> Unit
+    private val itemSelected: (Coffee) -> Unit
 ) : RecyclerView.Adapter<CoffeeHomeAdapter.CoffeeVH>() {
 
     class CoffeeVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -26,7 +25,7 @@ class CoffeeHomeAdapter(
         private val coffeeSizeL = itemView.findViewById<RadioButton>(R.id.buyuk)
         private val coffeeSyrup = itemView.findViewById<CheckBox>(R.id.checkbox_1)
         private val coffeeCream = itemView.findViewById<CheckBox>(R.id.checkbox_2)
-        private val coffeeSugar = itemView.findViewById<CheckBox>(R.id.switch2)
+        private val coffeeSugar = itemView.findViewById<Switch>(R.id.switch2)
         private val coffeeAmount = itemView.findViewById<TextView>(R.id.adet)
 
 
@@ -37,8 +36,7 @@ class CoffeeHomeAdapter(
 
         fun bind(
             coffee: Coffee,
-            totalAmount: (Double) -> Unit,
-            basketList: (ArrayList<Coffee>) -> Unit
+            itemSelected: (Coffee) -> Unit
         ) {
             coffeeName.text = coffee.name + coffee.price
             Glide.with(itemView.context).load(coffee.imageUrl).centerCrop().into(coffeeImage)
@@ -68,15 +66,12 @@ class CoffeeHomeAdapter(
                 if (coffeeAmount.text.toString() != "" && coffeeAmount.text.toString() != "0") {
                     price = (coffeeAmount.text.toString().toDouble() * price)
                     totalPrice += price
-                    totalAmount(totalPrice)
 
-                    val coffee = Coffee()
-                    coffee.imageUrl = coffee.imageUrl
-                    coffee.price = price.toString()
-                    coffee.coffeeSize = selectedCoffeeSize
-                    coffee.name = coffee.name
-                    _basket.add(coffee)
-                    basketList(_basket)
+                    val newcoffee = coffee
+                    newcoffee.coffeeSize = selectedCoffeeSize
+
+                    _basket.add(newcoffee)
+                    itemSelected(newcoffee)
 
                 } else {
                     Toast.makeText(itemView.context, "Lütfen adet giriniz", Toast.LENGTH_LONG)
@@ -102,11 +97,9 @@ class CoffeeHomeAdapter(
     }
 
     override fun onBindViewHolder(holder: CoffeeVH, position: Int) {
-        holder.bind(coffeeList[position], { totalPrice ->
-            totalAmount(totalPrice)
-        }, { list ->
-            basketList(list)
-        })
+        holder.bind(coffeeList[position]) { newcoffee ->
+            itemSelected(newcoffee)
+        }
     }
 
     override fun getItemCount() = coffeeList.size

@@ -26,14 +26,12 @@ class LoginActivity : AppCompatActivity() {
         auth = Firebase.auth
 
         buttonLogin.setOnClickListener {
-            if(emailAddressEdittextView.text.isEmpty())
-            {
+            if (emailAddressEdittextView.text.isEmpty()) {
                 emailAddressEdittextView.error = "Email adresinizi giriniz"
                 emailAddressEdittextView.requestFocus()
                 return@setOnClickListener
             }
-            if(passwordEdittextView.text.isEmpty())
-            {
+            if (passwordEdittextView.text.isEmpty()) {
                 passwordEdittextView.error = "Parolanızı giriniz"
                 passwordEdittextView.requestFocus()
                 return@setOnClickListener
@@ -52,8 +50,6 @@ class LoginActivity : AppCompatActivity() {
                         .show()
                 }?.addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        val intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)
                         finish()
                     }
                 }

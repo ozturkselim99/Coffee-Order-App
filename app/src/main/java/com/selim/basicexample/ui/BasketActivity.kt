@@ -9,21 +9,26 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.selim.basicexample.R
+import com.selim.basicexample.adapter.AddressAdapter
 import com.selim.basicexample.adapter.BasketAdapter
+import com.selim.basicexample.model.Address
 import com.selim.basicexample.model.Coffee
 
 class BasketActivity : AppCompatActivity() {
     private var firestore: FirebaseFirestore? = null
     private var auth: FirebaseAuth? = null
+    private val coffees = arrayListOf<Coffee>()
+    private var totalPrice:Double=0.0
+
+
+    private val recyclerViewBasket by lazy { findViewById<RecyclerView>(R.id.basketRecyclerView) }
+    private  val totalBasket by lazy { findViewById<TextView>(R.id.total_basket) }
 
     override fun onResume() {
         super.onResume()
         getMyBasket()
     }
 
-    private fun getMyBasket() {
-
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,21 +37,46 @@ class BasketActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
 
-        val recyclerViewBasket by lazy { findViewById<RecyclerView>(R.id.basketRecyclerView) }
-        val totalBasket by lazy { findViewById<TextView>(R.id.total_basket) }
+    }
 
-        var _totalBasket:Double=0.0
+    private fun getMyBasket() {
+        auth?.currentUser?.uid?.let { userId ->
+            firestore?.collection("user")?.whereEqualTo("userId", userId)
+                    ?.addSnapshotListener { value, error ->
 
-        if (basketList != null) {
-            basketList.forEach {
-                _totalBasket+=it.price!!.toDouble()
-            }
-            totalBasket.text="Toplam Tutar "+_totalBasket.toString()+"₺"
-            val layoutManager= GridLayoutManager(this,2)
-            recyclerViewBasket.layoutManager=layoutManager
+                        value?.documents?.firstOrNull()?.let { userDocumentId ->
 
-            val adapter= BasketAdapter(basketList)
-            recyclerViewBasket.adapter=adapter
+                            userDocumentId.reference.collection("basket")
+                                    .addSnapshotListener { snapshots, error ->
+
+                                        snapshots?.documents?.forEach { snapshot ->
+                                            snapshot.toObject(Coffee::class.java)
+                                                    ?.let { basket ->
+                                                        basket.id = snapshot.id
+                                                        coffees.add(basket)
+                                                    }
+                                        }
+                                        loadBasket(coffees)
+                                    }
+                        }
+                    }
         }
     }
+
+    private fun loadBasket(basketList: ArrayList<Coffee>) {
+        val layoutManager= GridLayoutManager(this,2)
+        recyclerViewBasket.layoutManager=layoutManager
+        val adapter= BasketAdapter(basketList)
+        recyclerViewBasket.adapter=adapter
+        totalPrice(basketList)
+    }
+
+    private fun totalPrice(basketList:ArrayList<Coffee>)
+    {
+        basketList.forEach { coffee->
+            totalPrice+=coffee.price.toString().toDouble()
+        }
+        totalBasket.text=totalPrice.toString()
+    }
+
 }

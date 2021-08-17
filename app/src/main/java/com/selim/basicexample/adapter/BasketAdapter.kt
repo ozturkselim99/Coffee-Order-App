@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.selim.basicexample.R
 import com.selim.basicexample.model.Coffee
-import kotlinx.android.synthetic.main.item_basket.view.*
 
 class BasketAdapter(private val coffeeList:ArrayList<Coffee>): RecyclerView.Adapter<BasketAdapter.BasketAdapterVH>() {
 

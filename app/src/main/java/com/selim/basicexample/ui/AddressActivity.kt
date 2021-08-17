@@ -12,7 +12,6 @@ import com.selim.basicexample.AddNewAddressActivity
 import com.selim.basicexample.R
 import com.selim.basicexample.adapter.AddressAdapter
 import com.selim.basicexample.model.Address
-import kotlinx.android.synthetic.main.activity_address.*
 
 class AddressActivity : AppCompatActivity() {
     var auth: FirebaseAuth? = null

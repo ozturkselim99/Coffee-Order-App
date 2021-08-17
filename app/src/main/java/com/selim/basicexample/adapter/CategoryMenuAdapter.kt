@@ -13,8 +13,6 @@ import com.bumptech.glide.Glide
 import com.selim.basicexample.R
 import com.selim.basicexample.model.CoffeeCategory
 import com.selim.basicexample.ui.CoffeesActivity
-import kotlinx.android.synthetic.main.item_category.view.*
-import kotlinx.android.synthetic.main.item_category_menu.view.*
 
 class CategoryMenuAdapter(private val context: Context, private val categoryList:ArrayList<CoffeeCategory>) : RecyclerView.Adapter<CategoryMenuAdapter.CategoryMenuVH>() {
 

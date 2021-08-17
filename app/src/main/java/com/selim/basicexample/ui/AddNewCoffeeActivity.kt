@@ -2,15 +2,13 @@ package com.selim.basicexample.ui
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.FirebaseFirestore
 import com.selim.basicexample.R
 import com.selim.basicexample.model.Coffee
-import kotlinx.android.synthetic.main.activity_add_new_address.*
-import kotlinx.android.synthetic.main.activity_add_new_coffee.*
-import kotlinx.android.synthetic.main.coffee_item_row.*
 
 class AddNewCoffeeActivity : AppCompatActivity() {
 
@@ -21,6 +19,7 @@ class AddNewCoffeeActivity : AppCompatActivity() {
     private val etCoffeeName by lazy { findViewById<EditText>(R.id.editText_kahveAdi) }
     private val etCoffeePrice by lazy {findViewById<EditText>(R.id.editText_kahveFiyati) }
     private val etCoffeeImg by lazy {findViewById<EditText>(R.id.editText_kahveImageUrl) }
+    private val buttonAddCoffee by lazy { findViewById<Button>(R.id.btn_kahveEkle) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +34,7 @@ class AddNewCoffeeActivity : AppCompatActivity() {
 
         firestore = FirebaseFirestore.getInstance()
 
-        btn_kahveEkle.setOnClickListener {
+        buttonAddCoffee.setOnClickListener {
             if (etCoffeeName.text.isEmpty()) {
                 etCoffeeName.error = "Kahve adı boş geçilemez"
                 etCoffeeName.requestFocus()
@@ -98,18 +97,18 @@ class AddNewCoffeeActivity : AppCompatActivity() {
     }
 
     private fun bindCoffee() {
-        editText_kahveAdi.setText(coffee?.name)
-        editText_kahveFiyati.setText(coffee?.price)
-        editText_kahveImageUrl.setText(coffee?.imageUrl)
-        btn_kahveEkle.text = "Güncelle"
+        etCoffeeName.setText(coffee?.name)
+        etCoffeePrice.setText(coffee?.price)
+        etCoffeeImg.setText(coffee?.imageUrl)
+        buttonAddCoffee.text = "Güncelle"
     }
 
     private fun addNewCoffee() {
 
         val coffee = Coffee().apply {
-            name = editText_kahveAdi.text.toString()
-            price = editText_kahveFiyati.text.toString()
-            imageUrl = editText_kahveImageUrl.text.toString()
+            name = etCoffeeName.text.toString()
+            price = etCoffeePrice.text.toString()
+            imageUrl = etCoffeeImg.text.toString()
         }
 
         firestore?.collection("category")?.document(categoryId)?.collection("coffees")?.add(coffee)

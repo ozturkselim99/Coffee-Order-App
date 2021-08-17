@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.FirebaseFirestore
 import com.selim.basicexample.R
 import com.selim.basicexample.model.CoffeeCategory
-import kotlinx.android.synthetic.main.activity_add_new_category.*
 
 class AddNewCategoryActivity : AppCompatActivity() {
     private val buttonAdd by lazy { findViewById<View>(R.id.btn_add_category_to_db) }

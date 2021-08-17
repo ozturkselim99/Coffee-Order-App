@@ -10,7 +10,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.selim.basicexample.R
 import com.selim.basicexample.adapter.CategoryMenuAdapter
 import com.selim.basicexample.model.CoffeeCategory
-import kotlinx.android.synthetic.main.activity_coffee_category.*
 
 class CoffeeCategoryActivity : AppCompatActivity() {
     var firestore: FirebaseFirestore? = null

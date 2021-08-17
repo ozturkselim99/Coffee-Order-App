@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
@@ -15,15 +16,9 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.selim.basicexample.R
 import com.selim.basicexample.adapter.CategoryAdapter
-import com.selim.basicexample.adapter.CategoryMenuAdapter
-import com.selim.basicexample.adapter.CoffeeAdapter
 import com.selim.basicexample.adapter.CoffeeHomeAdapter
-import com.selim.basicexample.data.MockData
-import com.selim.basicexample.data.MockData.getCoffeeCategories
 import com.selim.basicexample.model.Coffee
 import com.selim.basicexample.model.CoffeeCategory
-import kotlinx.android.synthetic.main.activity_coffee_category.*
-import kotlinx.android.synthetic.main.activity_coffees.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -34,6 +29,7 @@ class MainActivity : AppCompatActivity() {
     private val buttonCategories: Button by lazy { findViewById(R.id.btn_categories) }
     private val recyclerViewProduct: RecyclerView by lazy { findViewById(R.id.recycler_view_product) }
     private val recyclerViewCategory: RecyclerView by lazy { findViewById(R.id.recycler_view_category) }
+    private val list: Button by lazy { findViewById(R.id.list) }
 
     private var firebase: FirebaseFirestore? = null
     private var basketList= arrayListOf<Coffee>()

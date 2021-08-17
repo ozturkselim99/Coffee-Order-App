@@ -2,6 +2,7 @@ package com.selim.basicexample.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -11,7 +12,6 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.selim.basicexample.R
-import kotlinx.android.synthetic.main.activity_add_new_user.*
 
 class AddNewUserActivity : AppCompatActivity() {
     var auth: FirebaseAuth? = null
@@ -20,6 +20,8 @@ class AddNewUserActivity : AppCompatActivity() {
     private val etPassword by lazy { findViewById<EditText>(R.id.et_password) }
     private val etEmail by lazy { findViewById<EditText>(R.id.et_email) }
     private val etPhone by lazy { findViewById<EditText>(R.id.et_phone) }
+    private val buttonRegister by lazy { findViewById<Button>(R.id.btn_register) }
+    private val buttonRegisterToLogin by lazy { findViewById<Button>(R.id.btn_register_to_login) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +30,7 @@ class AddNewUserActivity : AppCompatActivity() {
         auth = Firebase.auth
         firestore = FirebaseFirestore.getInstance()
 
-        btn_register.setOnClickListener {
+        buttonRegister.setOnClickListener {
             if (etUsername.text.isEmpty()) {
                 etUsername.error = "Kullanıcı adınızı giriniz"
                 etUsername.requestFocus()
@@ -61,7 +63,7 @@ class AddNewUserActivity : AppCompatActivity() {
                     auth?.currentUser?.let { user ->
 
                         val request = UserProfileChangeRequest.Builder()
-                            .setDisplayName(et_username.text.toString())
+                            .setDisplayName(etUsername.text.toString())
                             .build()
 
                         auth?.currentUser?.updateProfile(request)?.addOnSuccessListener {
@@ -79,7 +81,7 @@ class AddNewUserActivity : AppCompatActivity() {
 
         }
 
-        btn_register_to_login.setOnClickListener {
+        buttonRegisterToLogin.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }

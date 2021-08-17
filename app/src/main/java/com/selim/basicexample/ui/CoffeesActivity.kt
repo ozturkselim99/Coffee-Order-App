@@ -12,7 +12,6 @@ import com.google.firebase.firestore.QuerySnapshot
 import com.selim.basicexample.R
 import com.selim.basicexample.adapter.CoffeeAdapter
 import com.selim.basicexample.model.Coffee
-import kotlinx.android.synthetic.main.activity_coffees.*
 
 class CoffeesActivity : AppCompatActivity() {
 

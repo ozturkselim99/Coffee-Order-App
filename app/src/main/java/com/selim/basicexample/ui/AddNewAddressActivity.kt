@@ -12,8 +12,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.selim.basicexample.model.Address
 import com.selim.basicexample.ui.LoginActivity
-import kotlinx.android.synthetic.main.activity_add_new_address.*
-import kotlinx.android.synthetic.main.item_address.*
 
 // todo: selim
 class AddNewAddressActivity : AppCompatActivity() {

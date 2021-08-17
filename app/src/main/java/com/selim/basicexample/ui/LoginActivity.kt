@@ -10,8 +10,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.selim.basicexample.R
-import kotlinx.android.synthetic.main.activity_add_new_user.*
-import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
     var auth: FirebaseAuth? = null

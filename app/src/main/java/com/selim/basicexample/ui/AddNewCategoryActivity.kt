@@ -25,10 +25,10 @@ class AddNewCategoryActivity : AppCompatActivity() {
 
         buttonAdd.setOnClickListener {
 
-            if(et_category_name.text.isEmpty())
+            if(editTextCategoryName.text.isEmpty())
             {
-                et_category_name.error = "Kategori adını giriniz"
-                et_category_name.requestFocus()
+                editTextCategoryName.error = "Kategori adını giriniz"
+                editTextCategoryName.requestFocus()
                 return@setOnClickListener
             }
             if(et_image_url.text.isEmpty())

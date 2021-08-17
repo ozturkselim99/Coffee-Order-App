@@ -49,16 +49,6 @@ class MainActivity : AppCompatActivity() {
         val layoutManager = LinearLayoutManager(this)
         recycler_view_product.layoutManager = layoutManager
 
-        // todo: berkhan firestore çekelim CoffeeCategoryActivity
-        /*val categoryAdapter = CategoryAdapter(list, ) {
-                categoryId -> getCoffeesAsCategory(categoryId)
-        }
-        recycler_view_category.adapter = categoryAdapter
-
-        Ben bu üstteki kodların mantığını anlamadım. Kategorilerin sabit kalması gerekmiyor mu? O yüzden adapter'ı loadCategories() içine yazdım.
-
-        */
-
         //Siparis listesine gitme ve veri yollama
 
         list.setOnClickListener {
@@ -105,12 +95,13 @@ class MainActivity : AppCompatActivity() {
     private fun loadCategories(list: ArrayList<CoffeeCategory>) {
         val gridLayoutManager = GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false)
         recycler_view_category.layoutManager = gridLayoutManager
-        val categoryAdapter = CategoryAdapter(list)
+        val categoryAdapter = CategoryAdapter(list){ categoryId ->
+            getCoffeesAsCategory(categoryId)
+        }
         recycler_view_category.adapter = categoryAdapter
     }
 
     private fun getCoffeesAsCategory(categoryId: String) {
-        //todo: selim firestore CoffeesActivity
         firebase?.collection("category")?.document(categoryId)?.collection("coffees")?.addSnapshotListener { snapshot, error ->
             val list = ArrayList<Coffee>()
             snapshot?.documents?.forEach { documentSnapshot ->

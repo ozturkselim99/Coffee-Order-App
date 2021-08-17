@@ -98,6 +98,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/selim/basicexample/ui/MainActivity2.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/res/layout/activity_add_new_address.xml">
           <value>
             <set />
@@ -284,6 +289,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/../smart-alarm-android/app/src/main/java/com/smartalarm/sleeptic/SmartAlarm.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../smart-alarm-android/app/src/main/java/com/smartalarm/sleeptic/helper/Desk360Helper.kt">
           <value>
             <set />
           </value>

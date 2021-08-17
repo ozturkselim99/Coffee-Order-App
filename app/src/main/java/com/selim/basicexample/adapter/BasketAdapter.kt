@@ -3,15 +3,30 @@ package com.selim.basicexample.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.selim.basicexample.R
 import com.selim.basicexample.model.Coffee
 import kotlinx.android.synthetic.main.item_basket.view.*
 
-class BasketAdapter(val coffeeList:ArrayList<Coffee>): RecyclerView.Adapter<BasketAdapter.BasketAdapterVH>() {
+class BasketAdapter(private val coffeeList:ArrayList<Coffee>): RecyclerView.Adapter<BasketAdapter.BasketAdapterVH>() {
 
     class BasketAdapterVH(itemView: View):RecyclerView.ViewHolder(itemView){
+
+        private val basketCoffeeName = itemView.findViewById<TextView>(R.id.basket_coffee_name)
+        private val basketCoffeeSize = itemView.findViewById<TextView>(R.id.basket_coffee_size)
+        private val basketCoffeePrice= itemView.findViewById<TextView>(R.id.basket_coffee_price)
+        private val basketCoffeeImage=itemView.findViewById<ImageView>(R.id.basket_coffee_image)
+
+        fun bind(coffee: Coffee)
+        {
+            basketCoffeeName.text=coffee.name
+            basketCoffeeSize.text=coffee.coffeeSize
+            basketCoffeePrice.text=coffee.price
+            Glide.with(itemView.context).load(coffee.imageUrl).centerCrop().into(basketCoffeeImage)
+        }
 
     }
 
@@ -21,13 +36,9 @@ class BasketAdapter(val coffeeList:ArrayList<Coffee>): RecyclerView.Adapter<Bask
     }
 
     override fun onBindViewHolder(holder: BasketAdapterVH, position: Int) {
-        holder.itemView.basket_coffee_size.text=coffeeList.get(position).coffeeSize
-        holder.itemView.basket_coffee_name.text=coffeeList.get(position).name
-        holder.itemView.basket_coffee_price.text=coffeeList.get(position).price
-        Glide.with(holder.itemView.context).load(coffeeList.get(position).imageUrl).centerCrop().into(holder.itemView.basket_coffee_image)
+        holder.bind(coffeeList[position])
     }
 
-    override fun getItemCount(): Int {
-        return coffeeList.size
-    }
+    override fun getItemCount() = coffeeList.size
+
 }

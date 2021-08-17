@@ -3,6 +3,8 @@ package com.selim.basicexample.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
@@ -11,7 +13,8 @@ import com.selim.basicexample.R
 import com.selim.basicexample.model.Coffee
 import kotlinx.android.synthetic.main.item_coffee.view.*
 
-class CoffeeHomeAdapter(val coffeeList:ArrayList<Coffee>):RecyclerView.Adapter<CoffeeHomeAdapter.CoffeeVH>() {
+
+class CoffeeHomeAdapter(private val coffeeList:ArrayList<Coffee>):RecyclerView.Adapter<CoffeeHomeAdapter.CoffeeVH>() {
 
     var totalPrice:Double=0.0
     var selectedCoffeeSize:String="Küçük"
@@ -22,6 +25,15 @@ class CoffeeHomeAdapter(val coffeeList:ArrayList<Coffee>):RecyclerView.Adapter<C
 
     class CoffeeVH(itemView: View):RecyclerView.ViewHolder(itemView) {
 
+        private val coffeeName = itemView.findViewById<TextView>(R.id.coffee_name)
+        private val coffeeImage=itemView.findViewById<ImageView>(R.id.imageView)
+
+        fun bind(coffee: Coffee)
+        {
+            coffeeName.text=coffee.name+coffee.price
+            Glide.with(itemView.context).load(coffee.imageUrl).centerCrop().into(coffeeImage)
+        }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoffeeVH {
@@ -30,14 +42,13 @@ class CoffeeHomeAdapter(val coffeeList:ArrayList<Coffee>):RecyclerView.Adapter<C
     }
 
     override fun onBindViewHolder(holder: CoffeeVH, position: Int) {
-        holder.itemView.coffee_name.text=coffeeList.get(position).name+" "+coffeeList.get(position).price+"₺"
-        //Glide Kullanımı
-        Glide.with(holder.itemView.context).load(coffeeList.get(position).imageUrl).centerCrop().into(holder.itemView.imageView)
+        holder.bind(coffeeList[position])
+
         holder.itemView.siparis_ver.setOnClickListener {
-            price= coffeeList.get(position).price.toString().toDouble()
+            price = coffeeList[position].price.toString().toDouble()
             //Seçimlere göre hesaplamalar
             when(holder.itemView.radio_group.checkedRadioButtonId){
-                holder.itemView.kucuk.id->price=coffeeList.get(position).price.toString().toDouble()
+                holder.itemView.kucuk.id->price= coffeeList[position].price.toString().toDouble()
                 holder.itemView.orta.id->price+=2
                 holder.itemView.buyuk.id->price+=3
             }
@@ -46,11 +57,9 @@ class CoffeeHomeAdapter(val coffeeList:ArrayList<Coffee>):RecyclerView.Adapter<C
                 holder.itemView.orta.id->selectedCoffeeSize="Orta"
                 holder.itemView.buyuk.id->selectedCoffeeSize="Büyük"
             }
-
             when(holder.itemView.checkbox_1.isChecked){
                 true->price+=1
             }
-
             when(holder.itemView.checkbox_2.isChecked){
                 true->price+=1
             }
@@ -65,10 +74,10 @@ class CoffeeHomeAdapter(val coffeeList:ArrayList<Coffee>):RecyclerView.Adapter<C
                 total.value=totalPrice
 
                 val coffee=Coffee()
-                coffee.imageUrl=coffeeList.get(position).imageUrl
+                coffee.imageUrl= coffeeList[position].imageUrl
                 coffee.price=price.toString()
                 coffee.coffeeSize=selectedCoffeeSize
-                coffee.name=coffeeList.get(position).name
+                coffee.name= coffeeList[position].name
                 _basket.add(coffee)
                 basket.value=_basket
             }
@@ -76,19 +85,18 @@ class CoffeeHomeAdapter(val coffeeList:ArrayList<Coffee>):RecyclerView.Adapter<C
             {
                 Toast.makeText(holder.itemView.context,"Lütfen adet giriniz",Toast.LENGTH_LONG).show()
             }
-
             // Seçimleri Temizleme
             holder.itemView.checkbox_1.isChecked=false
             holder.itemView.checkbox_2.isChecked=false
             holder.itemView.adet.setText("1")
             holder.itemView.radio_group.clearCheck()
             holder.itemView.switch2.isChecked=false
-            price=coffeeList.get(position).price.toString().toDouble()
+            price= coffeeList[position].price.toString().toDouble()
         }
     }
-    override fun getItemCount(): Int {
-        return coffeeList.size
-    }
+
+    override fun getItemCount()=coffeeList.size
+
 }
 
 

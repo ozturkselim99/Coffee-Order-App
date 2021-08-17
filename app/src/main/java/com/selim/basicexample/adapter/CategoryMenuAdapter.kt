@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Adapter
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.selim.basicexample.R
@@ -14,8 +16,19 @@ import com.selim.basicexample.ui.CoffeesActivity
 import kotlinx.android.synthetic.main.item_category.view.*
 import kotlinx.android.synthetic.main.item_category_menu.view.*
 
-class CategoryMenuAdapter(private val context: Context, val categoryList:ArrayList<CoffeeCategory>) : RecyclerView.Adapter<CategoryMenuAdapter.CategoryMenuVH>() {
+class CategoryMenuAdapter(private val context: Context, private val categoryList:ArrayList<CoffeeCategory>) : RecyclerView.Adapter<CategoryMenuAdapter.CategoryMenuVH>() {
+
     class CategoryMenuVH(itemView:View) : RecyclerView.ViewHolder(itemView) {
+
+        private val categoryName = itemView.findViewById<TextView>(R.id.tv_category_menu_name)
+        private val categoryImage = itemView.findViewById<ImageView>(R.id.img_category_menu)
+
+        fun bind(category:CoffeeCategory)
+        {
+            categoryName.text=category.name
+            Glide.with(itemView.context).load(category.imageUrl).centerCrop().into(categoryImage)
+        }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryMenuVH {
@@ -24,13 +37,11 @@ class CategoryMenuAdapter(private val context: Context, val categoryList:ArrayLi
     }
 
     override fun onBindViewHolder(holder: CategoryMenuVH, position: Int) {
-        val category = categoryList.get(position)
-        Glide.with(holder.itemView.context).load(category.imageUrl).centerCrop().into(holder.itemView.img_category_menu)
-        holder.itemView.tv_category_menu_name.text = category.name
+        holder.bind(categoryList[position])
 
         holder.itemView.setOnClickListener {
             val intent = Intent(context, CoffeesActivity::class.java)
-            intent.putExtra("CATEGORY_ID", category.id)
+            intent.putExtra("CATEGORY_ID", categoryList[position].id)
             context.startActivity(intent)
         }
     }

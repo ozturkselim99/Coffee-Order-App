@@ -12,6 +12,7 @@ import com.selim.basicexample.model.Address
 
 class AddressAdapter(private val addressList: MutableList<Address>) :
     RecyclerView.Adapter<AddressAdapter.AddressVH>() {
+
     class AddressVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val addressName = itemView.findViewById<TextView>(R.id.tv_address_name)
@@ -23,8 +24,8 @@ class AddressAdapter(private val addressList: MutableList<Address>) :
                 address.city + " " + address.district + " " +
                         address.avenue + " " + address.neighborhood + " " + address.street + " " +
                         address.buildingNumber + " " + address.number
-
         }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AddressVH {

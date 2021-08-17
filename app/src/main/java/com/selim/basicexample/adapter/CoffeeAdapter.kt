@@ -4,6 +4,8 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
@@ -16,9 +18,22 @@ import com.selim.basicexample.ui.AddNewCoffeeActivity
 import kotlinx.android.synthetic.main.coffee_item_row.*
 import kotlinx.android.synthetic.main.coffee_item_row.view.*
 
-class CoffeeAdapter(private val categoryId:String, val coffeeList:ArrayList<Coffee>): RecyclerView.Adapter<CoffeeAdapter.CoffeeVH>() {
+class CoffeeAdapter(private val categoryId:String, private val coffeeList:ArrayList<Coffee>): RecyclerView.Adapter<CoffeeAdapter.CoffeeVH>() {
 
     class CoffeeVH(itemView: View) : RecyclerView.ViewHolder(itemView){
+
+        private val coffeeName = itemView.findViewById<TextView>(R.id.kahve_adi_txt)
+        private val coffeeCategory = itemView.findViewById<TextView>(R.id.kahve_kategorisi_txt)
+        private val coffeePrice= itemView.findViewById<TextView>(R.id.kahve_fiyati_txt)
+        private val coffeeImage=itemView.findViewById<ImageView>(R.id.basket_coffee_image)
+
+        fun bind(coffee:Coffee)
+        {
+            coffeeName.text=coffee.name
+            //todo:burada kategori ismini nasıl gösterebiliriz?
+            coffeePrice.text=coffee.price
+            Glide.with(itemView.context).load(coffee.imageUrl).centerCrop().into(coffeeImage)
+        }
 
     }
 
@@ -28,10 +43,7 @@ class CoffeeAdapter(private val categoryId:String, val coffeeList:ArrayList<Coff
     }
 
     override fun onBindViewHolder(holder: CoffeeVH, position: Int) {
-        Glide.with(holder.itemView.context).load(coffeeList.get(position).imageUrl).centerCrop().into(holder.itemView.kahve_foto)
-        holder.itemView.kahve_adi_txt.text = coffeeList.get(position).name
-        holder.itemView.kahve_fiyati_txt.text = coffeeList.get(position).price+"TL"
-        holder.itemView.kahve_kategorisi_txt.text = categoryId //todo: burada kategori ismini nasıl gösterebiliriz?
+        holder.bind(coffeeList[position])
 
         holder.itemView.item_coffee.setOnClickListener {
             val intent = Intent(holder.itemView.context, AddNewCoffeeActivity::class.java)

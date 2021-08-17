@@ -6,7 +6,6 @@ import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,7 +18,6 @@ import com.selim.basicexample.adapter.CategoryAdapter
 import com.selim.basicexample.adapter.CoffeeHomeAdapter
 import com.selim.basicexample.model.Coffee
 import com.selim.basicexample.model.CoffeeCategory
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,9 +30,10 @@ class MainActivity : AppCompatActivity() {
     private val list: Button by lazy { findViewById(R.id.list) }
 
     private var firebase: FirebaseFirestore? = null
-    private var basketList= arrayListOf<Coffee>()
+    private var basketList = arrayListOf<Coffee>()
     private var totalBasket: Double = 0.0
 
+    private val totalPriceTextView by lazy { findViewById<TextView>(R.id.total_price) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -97,23 +96,24 @@ class MainActivity : AppCompatActivity() {
     private fun loadCategories(list: ArrayList<CoffeeCategory>) {
         val gridLayoutManager = GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false)
         recyclerViewCategory.layoutManager = gridLayoutManager
-        val categoryAdapter = CategoryAdapter(list){ categoryId ->
+        val categoryAdapter = CategoryAdapter(list) { categoryId ->
             getCoffeesAsCategory(categoryId)
         }
         recyclerViewCategory.adapter = categoryAdapter
     }
 
     private fun getCoffeesAsCategory(categoryId: String) {
-        firebase?.collection("category")?.document(categoryId)?.collection("coffees")?.addSnapshotListener { snapshot, error ->
-            val list = ArrayList<Coffee>()
-            snapshot?.documents?.forEach { documentSnapshot ->
-                documentSnapshot.toObject(Coffee::class.java)?.let { coffee ->
-                    coffee.id = documentSnapshot.id
-                    list.add(coffee)
+        firebase?.collection("category")?.document(categoryId)?.collection("coffees")
+            ?.addSnapshotListener { snapshot, error ->
+                val list = ArrayList<Coffee>()
+                snapshot?.documents?.forEach { documentSnapshot ->
+                    documentSnapshot.toObject(Coffee::class.java)?.let { coffee ->
+                        coffee.id = documentSnapshot.id
+                        list.add(coffee)
+                    }
                 }
+                loadCoffees(list)
             }
-            loadCoffees(list)
-        }
     }
 
     private fun checkUser() {
@@ -126,17 +126,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadCoffees(list: ArrayList<Coffee>) {
-        val coffeeAdapter = CoffeeHomeAdapter(list)
-        recyclerViewProduct.adapter = coffeeAdapter
-
-        //Adapter içindeki total değişkenimizi gözlemliyoruz. Değişkende bir değişiklik olduğunda activity_xml içindeki total_price textini değiştiriyoruz.
-        coffeeAdapter.total.observe(this, Observer {
-            total_price.text = "Toplam Tutar: " + it.toString() + "₺"
+        val coffeeAdapter = CoffeeHomeAdapter(list, {
+            totalPriceTextView.text = "Toplam Tutar: " + it.toString() + "₺"
             totalBasket = it
-        })
-        coffeeAdapter.basket.observe(this, Observer {
+        }, {
             basketList = it
         })
+        recyclerViewProduct.adapter = coffeeAdapter
     }
 }
 

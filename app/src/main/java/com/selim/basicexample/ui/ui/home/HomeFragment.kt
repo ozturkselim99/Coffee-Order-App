@@ -8,8 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.selim.basicexample.ui.R
-import com.selim.basicexample.ui.databinding.FragmentHomeBinding
+import com.selim.basicexample.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
 

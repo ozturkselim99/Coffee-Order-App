@@ -3,6 +3,8 @@ package com.selim.basicexample.ui
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
+import android.view.View
 import android.widget.TextView
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
@@ -14,6 +16,8 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.selim.basicexample.R
 import com.selim.basicexample.databinding.ActivityMain2Binding
 
@@ -34,8 +38,7 @@ class MainActivity2 : AppCompatActivity() {
         setSupportActionBar(binding.appBarMain2.toolbar)
 
         binding.appBarMain2.fab.setOnClickListener { view ->
-            // todo: berkhan, login kontrolü
-
+            checkUser()
             val intent = Intent(this, BasketActivity::class.java)
             startActivity(intent)
         }
@@ -44,7 +47,7 @@ class MainActivity2 : AppCompatActivity() {
         val navView: NavigationView = binding.navView
 
         navView.menu.findItem(R.id.nav_address).setOnMenuItemClickListener {
-            // todo: berkhan, login kontrolü
+            checkUser()
 
             val intent = Intent(this, AddressActivity::class.java)
             startActivity(intent)
@@ -77,5 +80,13 @@ class MainActivity2 : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main2)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    private fun checkUser() {
+        auth = Firebase.auth
+        if (auth?.currentUser == null) {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+        }
     }
 }

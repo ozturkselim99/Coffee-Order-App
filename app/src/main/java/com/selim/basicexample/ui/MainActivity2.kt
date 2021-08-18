@@ -3,6 +3,7 @@ package com.selim.basicexample.ui
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.widget.TextView
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
@@ -12,6 +13,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 import com.selim.basicexample.R
 import com.selim.basicexample.databinding.ActivityMain2Binding
 
@@ -19,9 +21,12 @@ class MainActivity2 : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMain2Binding
+    private var auth:FirebaseAuth? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        auth = FirebaseAuth.getInstance()
 
         binding = ActivityMain2Binding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -29,18 +34,34 @@ class MainActivity2 : AppCompatActivity() {
         setSupportActionBar(binding.appBarMain2.toolbar)
 
         binding.appBarMain2.fab.setOnClickListener { view ->
+            // todo: berkhan, login kontrolü
+
             val intent = Intent(this, BasketActivity::class.java)
             startActivity(intent)
         }
 
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
+
+        navView.menu.findItem(R.id.nav_address).setOnMenuItemClickListener {
+            // todo: berkhan, login kontrolü
+
+            val intent = Intent(this, AddressActivity::class.java)
+            startActivity(intent)
+            return@setOnMenuItemClickListener true
+        }
+
+        val headerView = navView.getHeaderView(0)
+        headerView.findViewById<TextView>(R.id.text_view_user_name).text = auth?.currentUser?.displayName
+        headerView.findViewById<TextView>(R.id.text_view_user_mail_address).text = auth?.currentUser?.email
+
         val navController = findNavController(R.id.nav_host_fragment_content_main2)
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow
+                R.id.nav_home
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

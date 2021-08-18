@@ -6,6 +6,7 @@ import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.selim.basicexample.AddNewAddressActivity
@@ -17,7 +18,7 @@ class AddressActivity : AppCompatActivity() {
     var auth: FirebaseAuth? = null
     var firestore: FirebaseFirestore? = null
     private val recyclerViewAddress by lazy { findViewById<RecyclerView>(R.id.recycler_view_address) }
-    private val buttonAddAddress by lazy { findViewById<RecyclerView>(R.id.fab_add) }
+    private val buttonAddAddress by lazy { findViewById<FloatingActionButton>(R.id.fab_add) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -45,3 +45,15 @@ h
 8app/src/main/java/com/selim/basicexample/model/Coffee.kt,c/d/cde9bfaf49655633f7ee1d2f735fef7e32be025b
 q
 Aapp/src/main/java/com/selim/basicexample/adapter/CoffeeAdapter.kt,c/1/c150e2d040e207d137501120721766d34156d89e
+y
+Iapp/src/main/java/com/selim/basicexample/ui/ui/gallery/GalleryFragment.kt,9/8/987ed60e2af4ec5116d89f759ea62c388d9f3588
+}
+Mapp/src/main/java/com/selim/basicexample/ui/ui/slideshow/SlideshowFragment.kt,d/2/d253714f19c5e5716d6f887359b3f8549432a706
+u
+Eapp/src/main/java/com/selim/basicexample/adapter/CoffeeHomeAdapter.kt,7/0/701c9c5faf6aa93bf4524f8134968f2a96c9c87e
+l
+<app/src/main/java/com/selim/basicexample/ui/MainActivity2.kt,c/d/cd5eae4d6d5df47c9d7ecdbcc77a1541bab0ebb7
+s
+Capp/src/main/java/com/selim/basicexample/ui/ui/home/HomeFragment.kt,d/8/d80f6db3dc8797f669376f2f7265122a4013c7a0
+t
+Dapp/src/main/java/com/selim/basicexample/ui/ui/home/HomeViewModel.kt,4/6/460b0f29033964a5df407727763f5638c415e092

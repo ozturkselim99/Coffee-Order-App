@@ -3,6 +3,7 @@ package com.selim.basicexample.ui
 import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -74,7 +75,38 @@ class AddressActivity : AppCompatActivity() {
     }
 
     private fun loadAddresses(addresses: ArrayList<Address>) {
-        val addressAdapter = AddressAdapter(addresses)
+        val addressAdapter = AddressAdapter(addresses){addressId->
+            addressDelete(addressId)
+        }
         recyclerViewAddress.adapter = addressAdapter
     }
+
+    private fun addressDelete(addressId:String)
+    {
+        auth?.currentUser?.uid?.let { userId ->
+            firestore?.collection("user")?.whereEqualTo("userId", userId)
+                ?.addSnapshotListener { value, error ->
+                    value?.documents?.firstOrNull()?.let { userDocumentId ->
+                        userDocumentId.reference.collection("address").document(addressId).delete().addOnCompleteListener { task->
+                            when (task.isSuccessful) {
+                                true -> {
+                                    Toast.makeText(
+                                        this,
+                                        "Adres Silindi..",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                                false -> Toast.makeText(
+                                    this,
+                                    "Adres Silinemedi..",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+                    }
+                }
+        }
+
+    }
+
 }

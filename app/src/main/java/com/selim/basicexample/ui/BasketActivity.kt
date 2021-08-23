@@ -20,9 +20,7 @@ class BasketActivity : AppCompatActivity() {
 
     private var firestore: FirebaseFirestore? = null
     private var auth: FirebaseAuth? = null
-    private var coffees = arrayListOf<Coffee>()
     private var totalPrice:Double=0.0
-
 
     private val recyclerViewBasket by lazy { findViewById<RecyclerView>(R.id.basketRecyclerView) }
     private  val totalBasket by lazy { findViewById<TextView>(R.id.total_basket) }
@@ -38,7 +36,6 @@ class BasketActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_basket)
 
-
         auth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
 
@@ -53,6 +50,7 @@ class BasketActivity : AppCompatActivity() {
 
                             userDocumentId.reference.collection("basket")
                                     .addSnapshotListener { snapshots, error ->
+                                         val coffees = arrayListOf<Coffee>()
                                         snapshots?.documents?.forEach { snapshot ->
                                             snapshot.toObject(Coffee::class.java)
                                                     ?.let { basket ->
@@ -112,7 +110,6 @@ class BasketActivity : AppCompatActivity() {
                     }
                 }
         }
-        coffees.clear()
         totalPrice=0.0
     }
 

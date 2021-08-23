@@ -3,7 +3,9 @@ package com.selim.basicexample.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
@@ -15,14 +17,16 @@ import com.selim.basicexample.model.Address
 import com.selim.basicexample.model.Coffee
 
 class BasketActivity : AppCompatActivity() {
+
     private var firestore: FirebaseFirestore? = null
     private var auth: FirebaseAuth? = null
-    private val coffees = arrayListOf<Coffee>()
+    private var coffees = arrayListOf<Coffee>()
     private var totalPrice:Double=0.0
 
 
     private val recyclerViewBasket by lazy { findViewById<RecyclerView>(R.id.basketRecyclerView) }
     private  val totalBasket by lazy { findViewById<TextView>(R.id.total_basket) }
+    private  val checkBasket by lazy { findViewById<TextView>(R.id.checkBasket) }
 
     override fun onResume() {
         super.onResume()
@@ -33,6 +37,7 @@ class BasketActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_basket)
+
 
         auth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
@@ -48,7 +53,6 @@ class BasketActivity : AppCompatActivity() {
 
                             userDocumentId.reference.collection("basket")
                                     .addSnapshotListener { snapshots, error ->
-
                                         snapshots?.documents?.forEach { snapshot ->
                                             snapshot.toObject(Coffee::class.java)
                                                     ?.let { basket ->
@@ -57,6 +61,8 @@ class BasketActivity : AppCompatActivity() {
                                                     }
                                         }
                                         loadBasket(coffees)
+                                        totalPrice(coffees)
+
                                     }
                         }
                     }
@@ -64,11 +70,13 @@ class BasketActivity : AppCompatActivity() {
     }
 
     private fun loadBasket(basketList: ArrayList<Coffee>) {
+        basketIsEmpty(basketList)
         val layoutManager= GridLayoutManager(this,2)
         recyclerViewBasket.layoutManager=layoutManager
-        val adapter= BasketAdapter(basketList)
+        val adapter= BasketAdapter(basketList){coffeeId->
+            coffeeBasketDelete(coffeeId)
+        }
         recyclerViewBasket.adapter=adapter
-        totalPrice(basketList)
     }
 
     private fun totalPrice(basketList:ArrayList<Coffee>)
@@ -79,4 +87,40 @@ class BasketActivity : AppCompatActivity() {
         totalBasket.text=totalPrice.toString()
     }
 
+    private fun coffeeBasketDelete(coffeeId:String)
+    {
+        auth?.currentUser?.uid?.let { userId ->
+            firestore?.collection("user")?.whereEqualTo("userId", userId)
+                ?.addSnapshotListener { value, error ->
+                    value?.documents?.firstOrNull()?.let { userDocumentId ->
+                        userDocumentId.reference.collection("basket").document(coffeeId).delete().addOnCompleteListener { task->
+                            when (task.isSuccessful) {
+                                true -> {
+                                    Toast.makeText(
+                                        this,
+                                        "Sepetten Silindi..",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                                false -> Toast.makeText(
+                                    this,
+                                    "Sepetten Silinemedi..",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+                    }
+                }
+        }
+        coffees.clear()
+        totalPrice=0.0
+    }
+
+    private fun basketIsEmpty(basketList: ArrayList<Coffee>)
+    {
+        if (!basketList.isEmpty())
+        {
+            checkBasket.visibility=View.GONE
+        }
+    }
 }

@@ -10,14 +10,15 @@ import com.bumptech.glide.Glide
 import com.selim.basicexample.R
 import com.selim.basicexample.model.Coffee
 
-class BasketAdapter(private val coffeeList:ArrayList<Coffee>): RecyclerView.Adapter<BasketAdapter.BasketAdapterVH>() {
+class BasketAdapter(private val coffeeList:ArrayList<Coffee>,  private val deleteCoffeeId: (String) -> Unit): RecyclerView.Adapter<BasketAdapter.BasketAdapterVH>() {
 
-    class BasketAdapterVH(itemView: View):RecyclerView.ViewHolder(itemView){
+    class BasketAdapterVH(itemView: View,private val deleteCoffeeId: (String) -> Unit):RecyclerView.ViewHolder(itemView){
 
         private val basketCoffeeName = itemView.findViewById<TextView>(R.id.basket_coffee_name)
         private val basketCoffeeSize = itemView.findViewById<TextView>(R.id.basket_coffee_size)
         private val basketCoffeePrice= itemView.findViewById<TextView>(R.id.basket_coffee_price)
         private val basketCoffeeImage=itemView.findViewById<ImageView>(R.id.basket_coffee_image)
+        private val basketCoffeeDelete=itemView.findViewById<ImageView>(R.id.basket_coffe_delete)
 
         fun bind(coffee: Coffee)
         {
@@ -25,17 +26,22 @@ class BasketAdapter(private val coffeeList:ArrayList<Coffee>): RecyclerView.Adap
             basketCoffeeSize.text=coffee.coffeeSize
             basketCoffeePrice.text=coffee.price
             Glide.with(itemView.context).load(coffee.imageUrl).centerCrop().into(basketCoffeeImage)
+            basketCoffeeDelete.setOnClickListener {
+                deleteCoffeeId(coffee.id.toString())
+            }
+
         }
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BasketAdapterVH {
         val itemView= LayoutInflater.from(parent.context).inflate(R.layout.item_basket, parent,false)
-        return BasketAdapterVH(itemView)
+        return BasketAdapterVH(itemView,deleteCoffeeId)
     }
 
     override fun onBindViewHolder(holder: BasketAdapterVH, position: Int) {
         holder.bind(coffeeList[position])
+
     }
 
     override fun getItemCount() = coffeeList.size

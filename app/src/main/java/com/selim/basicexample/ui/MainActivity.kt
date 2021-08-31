@@ -45,8 +45,14 @@ class MainActivity : AppCompatActivity() {
 
         navView.menu.findItem(R.id.nav_address).setOnMenuItemClickListener {
             checkUser()
-
             val intent = Intent(this, AddressActivity::class.java)
+            startActivity(intent)
+            return@setOnMenuItemClickListener true
+        }
+
+        navView.menu.findItem(R.id.nav_signout).setOnMenuItemClickListener {
+            auth!!.signOut()
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             return@setOnMenuItemClickListener true
         }

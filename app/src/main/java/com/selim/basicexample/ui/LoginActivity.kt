@@ -50,6 +50,7 @@ class LoginActivity : AppCompatActivity() {
                         .show()
                 }?.addOnCompleteListener { task ->
                     if (task.isSuccessful) {
+                        startActivity(Intent(this, MainActivity::class.java))
                         finish()
                     }
                 }

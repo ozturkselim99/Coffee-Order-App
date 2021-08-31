@@ -121,7 +121,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:textSize="24dp"
+                android:textSize="24sp"
                 android:text="00 TL"
                 app:layout_constraintEnd_toEndOf="@+id/img_coffee_item"
                 app:layout_constraintStart_toStartOf="@+id/img_coffee_item"

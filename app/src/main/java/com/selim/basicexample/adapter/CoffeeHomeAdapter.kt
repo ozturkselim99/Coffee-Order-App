@@ -77,7 +77,7 @@ class CoffeeHomeAdapter(
 
                     val newcoffee = coffee
                     newcoffee.coffeeSize = selectedCoffeeSize
-                    newcoffee.price = totalPrice.toString()
+                    newcoffee.price = price.toString()
                     newcoffee.cream = cream
                     newcoffee.chocolateSyrup = chocolateSyrup
                     newcoffee.decaf = decaf

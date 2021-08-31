@@ -16,59 +16,70 @@ class CoffeeHomeAdapter(
 
     class CoffeeVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        private val coffeeName = itemView.findViewById<TextView>(R.id.coffee_name)
-        private val coffeeImage = itemView.findViewById<ImageView>(R.id.imageView)
-        private val addToBasket = itemView.findViewById<Button>(R.id.siparis_ver)
+        private val coffeeName = itemView.findViewById<TextView>(R.id.tv_coffee_name)
+        private val coffeeImage = itemView.findViewById<ImageView>(R.id.img_coffee_item)
+        private val coffeePrice = itemView.findViewById<TextView>(R.id.tv_coffee_price)
+        private val addToBasket = itemView.findViewById<Button>(R.id.btn_add_order)
         private val coffeeRadioGroup = itemView.findViewById<RadioGroup>(R.id.radio_group)
-        private val coffeeSizeS = itemView.findViewById<RadioButton>(R.id.kucuk)
-        private val coffeeSizeM = itemView.findViewById<RadioButton>(R.id.orta)
-        private val coffeeSizeL = itemView.findViewById<RadioButton>(R.id.buyuk)
-        private val coffeeSyrup = itemView.findViewById<CheckBox>(R.id.checkbox_1)
-        private val coffeeCream = itemView.findViewById<CheckBox>(R.id.checkbox_2)
-        private val coffeeSugar = itemView.findViewById<Switch>(R.id.switch2)
-        private val coffeeAmount = itemView.findViewById<TextView>(R.id.adet)
+        private val coffeeSizeS = itemView.findViewById<RadioButton>(R.id.small)
+        private val coffeeSizeM = itemView.findViewById<RadioButton>(R.id.medium)
+        private val coffeeSizeL = itemView.findViewById<RadioButton>(R.id.large)
+        private val coffeeSyrup = itemView.findViewById<CheckBox>(R.id.cb_chocolate_syrup)
+        private val coffeeCream = itemView.findViewById<CheckBox>(R.id.cb_cream)
+        private val coffeeDecaf = itemView.findViewById<Switch>(R.id.sw_decaf)
+        private val coffeeAmount = itemView.findViewById<TextView>(R.id.et_amount_coffee)
 
 
         var totalPrice: Double = 0.0
         var selectedCoffeeSize: String = "Küçük"
         var price: Double = 0.0
+        var cream: String = ""
+        var chocolateSyrup: String = ""
+        var decaf: String = ""
         val _basket = arrayListOf<Coffee>()
 
         fun bind(
             coffee: Coffee,
             itemSelected: (Coffee) -> Unit
         ) {
-            coffeeName.text = coffee.name + coffee.price
+            coffeeName.text = coffee.name
+            coffeePrice.text = coffee.price + " TL"
             Glide.with(itemView.context).load(coffee.imageUrl).centerCrop().into(coffeeImage)
             addToBasket.setOnClickListener {
 
                 price = coffee.price.toString().toDouble()
                 //Seçimlere göre hesaplamalar
-                when (coffeeRadioGroup.checkedRadioButtonId) {
+                when(coffeeRadioGroup.checkedRadioButtonId) {
                     coffeeSizeS.id -> price = coffee.price.toString().toDouble()
                     coffeeSizeM.id -> price += 2
                     coffeeSizeL.id -> price += 3
                 }
-                when (coffeeRadioGroup.checkedRadioButtonId) {
+                when(coffeeRadioGroup.checkedRadioButtonId) {
                     coffeeSizeS.id -> selectedCoffeeSize = "Küçük"
                     coffeeSizeM.id -> selectedCoffeeSize = "Orta"
                     coffeeSizeL.id -> selectedCoffeeSize = "Büyük"
                 }
-                when (coffeeSyrup.isChecked) {
-                    true -> price += 1
+                if(coffeeSyrup.isChecked) {
+                    price += 1
+                    chocolateSyrup = "Çikolata Şuruplu, "
                 }
-                when (coffeeCream.isChecked) {
-                    true -> price += 1
+                if(coffeeCream.isChecked) {
+                    price += 1
+                    cream = "Kremalı, "
                 }
-                when (coffeeSugar.isChecked) {
-                    true -> price += 1
+                if(coffeeDecaf.isChecked) {
+                    price += 1
+                    decaf = "Kafeinli"
                 }
-                if (coffeeAmount.text.toString() != "" && coffeeAmount.text.toString() != "0") {
+                if(coffeeAmount.text.toString() != "" && coffeeAmount.text.toString() != "0") {
                     price = (coffeeAmount.text.toString().toDouble() * price)
                     totalPrice += price
 
                     val newcoffee = coffee
                     newcoffee.coffeeSize = selectedCoffeeSize
+                    newcoffee.cream = cream
+                    newcoffee.chocolateSyrup = chocolateSyrup
+                    newcoffee.decaf = decaf
 
                     _basket.add(newcoffee)
                     itemSelected(newcoffee)
@@ -79,10 +90,10 @@ class CoffeeHomeAdapter(
                 }
                 // Seçimleri Temizleme
                 coffeeSyrup.isChecked = false
-                coffeeSugar.isChecked = false
+                coffeeDecaf.isChecked = false
                 coffeeAmount.setText("1")
                 coffeeRadioGroup.clearCheck()
-                coffeeSugar.isChecked = false
+                coffeeDecaf.isChecked = false
                 price = coffee.price.toString().toDouble()
 
             }

@@ -1,4 +1,4 @@
-package com.selim.basicexample.adapter
+/*package com.selim.basicexample.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -17,14 +17,12 @@ class CoffeeAdapter(private val categoryId:String, private val coffeeList:ArrayL
     class CoffeeVH(itemView: View) : RecyclerView.ViewHolder(itemView){
 
         private val coffeeName = itemView.findViewById<TextView>(R.id.kahve_adi_txt)
-        private val coffeeCategory = itemView.findViewById<TextView>(R.id.kahve_kategorisi_txt)
         private val coffeePrice= itemView.findViewById<TextView>(R.id.kahve_fiyati_txt)
         private val coffeeImage=itemView.findViewById<ImageView>(R.id.basket_coffee_image)
 
         fun bind(coffee:Coffee)
         {
             coffeeName.text=coffee.name
-            //todo:burada kategori ismini nasıl gösterebiliriz?
             coffeePrice.text=coffee.price
             Glide.with(itemView.context).load(coffee.imageUrl).centerCrop().into(coffeeImage)
         }
@@ -49,4 +47,4 @@ class CoffeeAdapter(private val categoryId:String, private val coffeeList:ArrayL
 
     override fun getItemCount() = coffeeList.size
 
-}
+}*/

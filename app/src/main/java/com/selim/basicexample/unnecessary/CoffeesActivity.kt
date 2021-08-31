@@ -1,4 +1,4 @@
-package com.selim.basicexample.ui
+/*package com.selim.basicexample.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -66,3 +66,5 @@ class CoffeesActivity : AppCompatActivity() {
 
 
 }
+
+ */

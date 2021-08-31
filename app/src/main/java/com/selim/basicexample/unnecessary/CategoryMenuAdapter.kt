@@ -1,4 +1,4 @@
-package com.selim.basicexample.adapter
+/*package com.selim.basicexample.adapter
 
 import android.content.Context
 import android.content.Intent
@@ -46,3 +46,5 @@ class CategoryMenuAdapter(private val context: Context, private val categoryList
 
     override fun getItemCount() = categoryList.size
 }
+
+ */

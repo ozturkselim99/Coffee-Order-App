@@ -11,18 +11,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BasicExample">
-        <activity android:name=".ui.AddNewCoffeeActivity" />
-        <activity android:name=".ui.CoffeesActivity" />
         <activity android:name=".ui.AddressActivity" />
-        <activity android:name=".ui.AddNewCategoryActivity" />
         <activity android:name=".ui.AddNewUserActivity" />
-        <activity android:name=".ui.CoffeeCategoryActivity" />
         <activity android:name=".ui.BasketActivity" />
         <activity android:name=".ui.LoginActivity" />
         <activity android:name=".AddNewAddressActivity" />
         <activity
-            android:name=".ui.MainActivity2"
-            android:label="@string/title_activity_main2"
+            android:name=".ui.MainActivity"
+            android:label="@string/title_activity_main"
             android:theme="@style/Theme.BasicExample.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

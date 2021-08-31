@@ -19,8 +19,8 @@ class HomeViewModel : ViewModel() {
     private val _coffees = MutableLiveData<ArrayList<Coffee>>()
     val coffees: LiveData<ArrayList<Coffee>> = _coffees
 
-    private val _isSuccessfullAddtoBasket = MutableLiveData<Boolean>()
-    val isSuccessfullAddtoBasket: LiveData<Boolean> = _isSuccessfullAddtoBasket
+    private val _isSuccessfulAddtoBasket = MutableLiveData<Boolean>()
+    val isSuccessfulAddtoBasket: LiveData<Boolean> = _isSuccessfulAddtoBasket
 
     private val _isNeedLogin = MutableLiveData<Boolean>()
     val isNeedLogin: LiveData<Boolean> = _isNeedLogin
@@ -73,7 +73,7 @@ class HomeViewModel : ViewModel() {
                     document?.id?.let { documentId ->
                         firestore?.collection("user")?.document(documentId)?.collection("basket")
                             ?.add(coffee)?.addOnCompleteListener { task ->
-                                _isSuccessfullAddtoBasket.value = task.isSuccessful
+                                _isSuccessfulAddtoBasket.value = task.isSuccessful
                             }
                     }
                 }

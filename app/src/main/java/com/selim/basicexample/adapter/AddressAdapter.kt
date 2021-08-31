@@ -21,7 +21,7 @@ class AddressAdapter(private val addressList: MutableList<Address>,private val a
         private val addressName = itemView.findViewById<TextView>(R.id.tv_address_name)
         private val addressInfo = itemView.findViewById<TextView>(R.id.tv_address_info)
         private val addressLayout = itemView.findViewById<ConstraintLayout>(R.id.address)
-        private val addressDelete=itemView.findViewById<ImageView>(R.id.address_delete)
+        private val addressDelete = itemView.findViewById<ImageView>(R.id.address_delete)
 
         fun bind(address: Address) {
             addressName.text = address.addressName

@@ -2,6 +2,7 @@ package com.selim.basicexample.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -37,12 +38,17 @@ class AddressActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-
     }
 
     override fun onResume() {
         super.onResume()
         getAddresses()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.main_activity, menu)
+        return true
     }
 
     private fun getAddresses() {

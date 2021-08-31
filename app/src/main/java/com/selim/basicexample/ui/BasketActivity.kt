@@ -60,7 +60,6 @@ class BasketActivity : AppCompatActivity() {
                                         }
                                         loadBasket(coffees)
                                         totalPrice(coffees)
-
                                     }
                         }
                     }

@@ -61,8 +61,8 @@ class HomeFragment : Fragment() {
             }
         })
 
-        homeViewModel.isSuccessfullAddtoBasket.observe(viewLifecycleOwner, { isSuccessfull ->
-            when (isSuccessfull) {
+        homeViewModel.isSuccessfulAddtoBasket.observe(viewLifecycleOwner, { isSuccessful ->
+            when (isSuccessful) {
                 true -> Toast.makeText(requireContext(), "Sepete eklendi", Toast.LENGTH_LONG).show()
                 false -> Toast.makeText(requireContext(), "Sepete eklenemedi", Toast.LENGTH_LONG)
                     .show()

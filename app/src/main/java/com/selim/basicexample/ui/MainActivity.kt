@@ -2,131 +2,82 @@ package com.selim.basicexample.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.widget.Button
+import android.view.Menu
 import android.widget.TextView
+import com.google.android.material.navigation.NavigationView
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.selim.basicexample.R
-import com.selim.basicexample.adapter.CategoryAdapter
-import com.selim.basicexample.adapter.CoffeeHomeAdapter
-import com.selim.basicexample.model.Coffee
-import com.selim.basicexample.model.CoffeeCategory
+import com.selim.basicexample.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private var auth: FirebaseAuth? = null
-    private val buttonSignOut: Button by lazy { findViewById(R.id.button_sign_out) }
-    private val buttonAddress: Button by lazy { findViewById(R.id.btn_address) }
-    private val buttonCategories: Button by lazy { findViewById(R.id.btn_categories) }
-    private val recyclerViewProduct: RecyclerView by lazy { findViewById(R.id.recycler_view_product) }
-    private val recyclerViewCategory: RecyclerView by lazy { findViewById(R.id.recycler_view_category) }
-    private val list: Button by lazy { findViewById(R.id.list) }
-
-    private var firebase: FirebaseFirestore? = null
-    private var basketList = arrayListOf<Coffee>()
-    private var totalBasket: Double = 0.0
-
-    private val totalPriceTextView by lazy { findViewById<TextView>(R.id.total_price) }
+    private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var binding: ActivityMainBinding
+    private var auth:FirebaseAuth? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
-        firebase = FirebaseFirestore.getInstance()
-        Log.d("MainActivityLIFECYCLE", "onCreate")
-        checkUser()
-        //örnek kategori id
-        getCoffeesAsCategory("K0xlIQUECx8adOELyJay")
-
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-        //Adapter
-        val layoutManager = LinearLayoutManager(this)
-        recyclerViewProduct.layoutManager = layoutManager
+        auth = FirebaseAuth.getInstance()
 
-        //Siparis listesine gitme ve veri yollama
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        list.setOnClickListener {
+        setSupportActionBar(binding.appBarMain.toolbar)
+
+        binding.appBarMain.fab.setOnClickListener { view ->
+            checkUser()
             val intent = Intent(this, BasketActivity::class.java)
-            intent.putExtra("list", basketList)
             startActivity(intent)
         }
 
-        buttonSignOut.setOnClickListener {
-            auth?.signOut()
-            checkUser()
-        }
+        val drawerLayout: DrawerLayout = binding.drawerLayout
+        val navView: NavigationView = binding.navView
 
-        buttonAddress.setOnClickListener {
+        navView.menu.findItem(R.id.nav_address).setOnMenuItemClickListener {
+            checkUser()
+
             val intent = Intent(this, AddressActivity::class.java)
             startActivity(intent)
+            return@setOnMenuItemClickListener true
         }
 
-        buttonCategories.setOnClickListener {
-            val intent = Intent(this, CoffeeCategoryActivity::class.java)
-            startActivity(intent)
-        }
+        val headerView = navView.getHeaderView(0)
+        headerView.findViewById<TextView>(R.id.text_view_user_name).text = auth?.currentUser?.displayName
+        headerView.findViewById<TextView>(R.id.text_view_user_mail_address).text = auth?.currentUser?.email
+
+        val navController = findNavController(R.id.nav_host_fragment_content_main)
+
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.nav_home
+            ), drawerLayout
+        )
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
     }
 
-    override fun onResume() {
-        super.onResume()
-        getCategories()
-    }
-
-    private fun getCategories() {
-        firebase?.collection("category")?.get()?.addOnSuccessListener { snapshot ->
-            val list = arrayListOf<CoffeeCategory>()
-
-            snapshot.documents.forEach { documentSnapshot ->
-                documentSnapshot.toObject(CoffeeCategory::class.java)?.let { category ->
-                    category.id = documentSnapshot.id
-                    list.add(category)
-                }
-            }
-            loadCategories(list)
-        }
-    }
-
-    private fun loadCategories(list: ArrayList<CoffeeCategory>) {
-        val gridLayoutManager = GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false)
-        recyclerViewCategory.layoutManager = gridLayoutManager
-        val categoryAdapter = CategoryAdapter(list) { categoryId ->
-            getCoffeesAsCategory(categoryId)
-        }
-        recyclerViewCategory.adapter = categoryAdapter
-    }
-
-    private fun getCoffeesAsCategory(categoryId: String) {
-        firebase?.collection("category")?.document(categoryId)?.collection("coffees")
-            ?.addSnapshotListener { snapshot, error ->
-                val list = ArrayList<Coffee>()
-                snapshot?.documents?.forEach { documentSnapshot ->
-                    documentSnapshot.toObject(Coffee::class.java)?.let { coffee ->
-                        coffee.id = documentSnapshot.id
-                        list.add(coffee)
-                    }
-                }
-                loadCoffees(list)
-            }
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.nav_host_fragment_content_main)
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
     private fun checkUser() {
         auth = Firebase.auth
-
         if (auth?.currentUser == null) {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
     }
-
-    private fun loadCoffees(list: ArrayList<Coffee>) {
-
-    }
 }
-

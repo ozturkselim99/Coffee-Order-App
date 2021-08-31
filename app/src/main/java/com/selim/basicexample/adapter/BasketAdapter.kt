@@ -16,15 +16,17 @@ class BasketAdapter(private val coffeeList:ArrayList<Coffee>,  private val delet
 
         private val basketCoffeeName = itemView.findViewById<TextView>(R.id.basket_coffee_name)
         private val basketCoffeeSize = itemView.findViewById<TextView>(R.id.basket_coffee_size)
-        private val basketCoffeePrice= itemView.findViewById<TextView>(R.id.basket_coffee_price)
-        private val basketCoffeeImage=itemView.findViewById<ImageView>(R.id.basket_coffee_image)
-        private val basketCoffeeDelete=itemView.findViewById<ImageView>(R.id.basket_coffe_delete)
+        private val basketCoffeePrice = itemView.findViewById<TextView>(R.id.basket_coffee_price)
+        private val basketCoffeeImage = itemView.findViewById<ImageView>(R.id.basket_coffee_image)
+        private val basketCoffeeExtra = itemView.findViewById<TextView>(R.id.basket_extra)
+        private val basketCoffeeDelete = itemView.findViewById<ImageView>(R.id.basket_coffee_delete)
 
         fun bind(coffee: Coffee)
         {
-            basketCoffeeName.text=coffee.name
-            basketCoffeeSize.text=coffee.coffeeSize
-            basketCoffeePrice.text=coffee.price
+            basketCoffeeName.text = coffee.name
+            basketCoffeeSize.text = coffee.coffeeSize
+            basketCoffeePrice.text = coffee.price + " TL"
+            basketCoffeeExtra.text = "Ekstralar: " + coffee.cream + coffee.chocolateSyrup + coffee.decaf
             Glide.with(itemView.context).load(coffee.imageUrl).centerCrop().into(basketCoffeeImage)
             basketCoffeeDelete.setOnClickListener {
                 deleteCoffeeId(coffee.id.toString())

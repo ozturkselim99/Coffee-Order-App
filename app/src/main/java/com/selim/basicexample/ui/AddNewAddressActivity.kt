@@ -13,7 +13,6 @@ import com.google.firebase.ktx.Firebase
 import com.selim.basicexample.model.Address
 import com.selim.basicexample.ui.LoginActivity
 
-// todo: selim
 class AddNewAddressActivity : AppCompatActivity() {
 
     private var auth: FirebaseAuth? = null

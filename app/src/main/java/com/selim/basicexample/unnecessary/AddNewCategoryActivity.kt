@@ -1,4 +1,4 @@
-package com.selim.basicexample.ui
+/*package com.selim.basicexample.ui
 
 import android.os.Bundle
 import android.view.View
@@ -67,3 +67,5 @@ class AddNewCategoryActivity : AppCompatActivity() {
         }
     }
 }
+
+*/

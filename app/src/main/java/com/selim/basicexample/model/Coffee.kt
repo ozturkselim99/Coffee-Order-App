@@ -7,5 +7,8 @@ data class Coffee(
     var name: String? = "",
     var price: String? = "",
     var imageUrl: String? = "",
-    var coffeeSize: String = ""
+    var coffeeSize: String = "",
+    var cream: String = "",
+    var chocolateSyrup: String = "",
+    var decaf: String = ""
 ) : Serializable

@@ -5,6 +5,8 @@ import com.selim.basicexample.model.Coffee
 import com.selim.basicexample.model.CoffeeCategory
 import com.selim.basicexample.model.User
 
+//Artık kullanılmıyor ama belki test için kullanırız.
+
 object MockData {
 
     private val userList= arrayListOf(

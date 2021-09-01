@@ -19,7 +19,6 @@ class AddNewUserActivity : AppCompatActivity() {
     private val etUsername by lazy { findViewById<EditText>(R.id.et_username) }
     private val etPassword by lazy { findViewById<EditText>(R.id.et_password) }
     private val etEmail by lazy { findViewById<EditText>(R.id.et_email) }
-    private val etPhone by lazy { findViewById<EditText>(R.id.et_phone) }
     private val buttonRegister by lazy { findViewById<Button>(R.id.btn_register) }
     private val buttonRegisterToLogin by lazy { findViewById<Button>(R.id.btn_register_to_login) }
 
@@ -46,12 +45,6 @@ class AddNewUserActivity : AppCompatActivity() {
             if (etEmail.text.isEmpty()) {
                 etEmail.error = "Email adresinizi giriniz"
                 etEmail.requestFocus()
-                return@setOnClickListener
-            }
-
-            if (etPhone.text.isEmpty()) {
-                etPhone.error = "Telefon numaranızı giriniz"
-                etPhone.requestFocus()
                 return@setOnClickListener
             }
 

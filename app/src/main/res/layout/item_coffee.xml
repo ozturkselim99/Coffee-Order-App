@@ -3,33 +3,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:backgroundTint="#dbb995">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:padding="4dp"
-            android:layout_margin="4dp"
+            android:layout_marginBottom="4dp"
             android:background="@drawable/bg_coffee"
             android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/img_coffee_item"
-                android:layout_width="115dp"
-                android:layout_height="115dp"
-                android:layout_marginTop="16dp"
+                android:layout_width="95dp"
+                android:layout_height="95dp"
+                android:layout_marginTop="24dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/avatars"/>
+                tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
                 android:id="@+id/tv_coffee_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
                 android:text="Kahve Adı"
-                android:layout_marginLeft="16dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@id/img_coffee_item"
-                app:layout_constraintTop_toTopOf="@id/img_coffee_item"
-                android:textSize="16sp"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <RadioGroup
                 android:id="@+id/radio_group"
@@ -37,32 +40,36 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintTop_toBottomOf="@id/tv_coffee_name"
-                app:layout_constraintStart_toStartOf="@id/tv_coffee_name">
+                app:layout_constraintStart_toEndOf="@id/img_coffee_item">
 
                 <RadioButton
                     android:id="@+id/small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Küçük" />
+                    android:text="Küçük"
+                    android:textSize="11sp"/>
 
                 <RadioButton
                     android:id="@+id/medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Orta" />
+                    android:text="Orta(+2 ₺)"
+                    android:textSize="11sp" />
 
                 <RadioButton
                     android:id="@+id/large"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Büyük" />
+                    android:text="Büyük (+4 ₺)"
+                    android:textSize="11sp" />
             </RadioGroup>
 
             <CheckBox
                 android:id="@+id/cb_chocolate_syrup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Çikolata Şurubu"
+                android:text="Çikolata Şurubu(+1 ₺)"
+                android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@id/radio_group"
                 app:layout_constraintTop_toBottomOf="@id/radio_group" />
 
@@ -70,15 +77,18 @@
                 android:id="@+id/cb_cream"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Krema"
+                android:text="Krema(+1 ₺)"
+                android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@id/cb_chocolate_syrup"
-                app:layout_constraintTop_toTopOf="@id/cb_chocolate_syrup"/>
+                app:layout_constraintTop_toTopOf="@id/cb_chocolate_syrup" />
 
             <Switch
-                android:id="@+id/sw_decaf"
+                android:id="@+id/sw_soft"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Decaf"
+                android:layout_marginStart="4dp"
+                android:text="Yumuşak İçim(+1 ₺)"
+                android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@id/cb_chocolate_syrup"
                 app:layout_constraintTop_toBottomOf="@id/cb_chocolate_syrup"
                 tools:ignore="UseSwitchCompatOrMaterialXml" />
@@ -87,42 +97,41 @@
                 android:id="@+id/amount_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Adet: "
-                android:textSize="16dp"
                 android:layout_marginTop="16dp"
-                app:layout_constraintTop_toBottomOf="@id/sw_decaf"
-                app:layout_constraintStart_toStartOf="@id/sw_decaf"/>
+                android:text="Adet: "
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@id/sw_soft"
+                app:layout_constraintTop_toBottomOf="@id/sw_soft" />
 
             <EditText
                 android:id="@+id/et_amount_coffee"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
                 android:inputType="numberDecimal"
                 android:text="1"
-                android:textSize="16sp"
-                app:layout_constraintTop_toTopOf="@id/amount_title"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@id/amount_title"
-                android:layout_marginBottom="4dp"
                 app:layout_constraintStart_toEndOf="@id/amount_title"
-                />
+                app:layout_constraintTop_toTopOf="@id/amount_title" />
 
             <Button
                 android:id="@+id/btn_add_order"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/et_amount_coffee"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="2dp"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:text="Ekle"/>
+                android:text="Ekle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sw_soft" />
 
             <TextView
                 android:id="@+id/tv_coffee_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
+                android:text="00"
                 android:textSize="24sp"
-                android:text="00 TL"
                 app:layout_constraintEnd_toEndOf="@+id/img_coffee_item"
                 app:layout_constraintStart_toStartOf="@+id/img_coffee_item"
                 app:layout_constraintTop_toBottomOf="@+id/img_coffee_item" />

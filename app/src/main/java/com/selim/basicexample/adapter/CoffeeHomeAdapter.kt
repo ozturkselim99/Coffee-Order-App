@@ -26,7 +26,7 @@ class CoffeeHomeAdapter(
         private val coffeeSizeL = itemView.findViewById<RadioButton>(R.id.large)
         private val coffeeSyrup = itemView.findViewById<CheckBox>(R.id.cb_chocolate_syrup)
         private val coffeeCream = itemView.findViewById<CheckBox>(R.id.cb_cream)
-        private val coffeeDecaf = itemView.findViewById<Switch>(R.id.sw_decaf)
+        private val coffeeSoft = itemView.findViewById<Switch>(R.id.sw_soft)
         private val coffeeAmount = itemView.findViewById<TextView>(R.id.et_amount_coffee)
 
 
@@ -35,7 +35,7 @@ class CoffeeHomeAdapter(
         var price: Double = 0.0
         var cream: String = ""
         var chocolateSyrup: String = ""
-        var decaf: String = ""
+        var soft: String = ""
         val _basket = arrayListOf<Coffee>()
 
         fun bind(
@@ -43,7 +43,7 @@ class CoffeeHomeAdapter(
             itemSelected: (Coffee) -> Unit
         ) {
             coffeeName.text = coffee.name
-            coffeePrice.text = coffee.price + " TL"
+            coffeePrice.text = coffee.price + " ₺"
             Glide.with(itemView.context).load(coffee.imageUrl).centerCrop().into(coffeeImage)
             addToBasket.setOnClickListener {
 
@@ -52,7 +52,7 @@ class CoffeeHomeAdapter(
                 when(coffeeRadioGroup.checkedRadioButtonId) {
                     coffeeSizeS.id -> price = coffee.price.toString().toDouble()
                     coffeeSizeM.id -> price += 2
-                    coffeeSizeL.id -> price += 3
+                    coffeeSizeL.id -> price += 4
                 }
                 when(coffeeRadioGroup.checkedRadioButtonId) {
                     coffeeSizeS.id -> selectedCoffeeSize = "Küçük"
@@ -67,9 +67,9 @@ class CoffeeHomeAdapter(
                     price += 1
                     cream = "Kremalı, "
                 }
-                if(coffeeDecaf.isChecked) {
+                if(coffeeSoft.isChecked) {
                     price += 1
-                    decaf = "Kafeinli"
+                    soft = "Yumuşak içim"
                 }
                 if(coffeeAmount.text.toString() != "" && coffeeAmount.text.toString() != "0") {
                     price = (coffeeAmount.text.toString().toDouble() * price)
@@ -80,7 +80,7 @@ class CoffeeHomeAdapter(
                     newcoffee.price = price.toString()
                     newcoffee.cream = cream
                     newcoffee.chocolateSyrup = chocolateSyrup
-                    newcoffee.decaf = decaf
+                    newcoffee.soft = soft
 
                     _basket.add(newcoffee)
                     itemSelected(newcoffee)
@@ -91,10 +91,10 @@ class CoffeeHomeAdapter(
                 }
                 // Seçimleri Temizleme
                 coffeeSyrup.isChecked = false
-                coffeeDecaf.isChecked = false
+                coffeeSoft.isChecked = false
                 coffeeAmount.setText("1")
                 coffeeRadioGroup.clearCheck()
-                coffeeDecaf.isChecked = false
+                coffeeSoft.isChecked = false
                 price = coffee.price.toString().toDouble()
 
             }

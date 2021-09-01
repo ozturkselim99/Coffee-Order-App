@@ -25,15 +25,13 @@ class BasketAdapter(private val coffeeList:ArrayList<Coffee>,  private val delet
         {
             basketCoffeeName.text = coffee.name
             basketCoffeeSize.text = coffee.coffeeSize
-            basketCoffeePrice.text = coffee.price + " TL"
-            basketCoffeeExtra.text = "Ekstralar: " + coffee.cream + coffee.chocolateSyrup + coffee.decaf
+            basketCoffeePrice.text = coffee.price + " ₺"
+            basketCoffeeExtra.text = "Ekstralar: " + coffee.cream + coffee.chocolateSyrup + coffee.soft
             Glide.with(itemView.context).load(coffee.imageUrl).centerCrop().into(basketCoffeeImage)
             basketCoffeeDelete.setOnClickListener {
                 deleteCoffeeId(coffee.id.toString())
             }
-
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BasketAdapterVH {

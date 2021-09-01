@@ -81,7 +81,7 @@ class BasketActivity : AppCompatActivity() {
         basketList.forEach { coffee->
             totalPrice+=coffee.price.toString().toDouble()
         }
-        totalBasket.text=totalPrice.toString()
+        totalBasket.text = "Toplam Tutar: " + totalPrice.toString() + " ₺"
     }
 
     private fun coffeeBasketDelete(coffeeId:String)

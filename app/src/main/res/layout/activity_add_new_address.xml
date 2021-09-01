@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    tools:context=".AddNewAddressActivity">
+    tools:context=".AddNewAddressActivity"
+    android:background="#F3EFED">
 
     <TextView
         android:id="@+id/txt_adresAdi"

@@ -10,5 +10,5 @@ data class Coffee(
     var coffeeSize: String = "",
     var cream: String = "",
     var chocolateSyrup: String = "",
-    var decaf: String = ""
+    var soft: String = ""
 ) : Serializable

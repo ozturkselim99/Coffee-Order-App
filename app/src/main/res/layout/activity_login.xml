@@ -4,18 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/logregbg"
     tools:context=".ui.LoginActivity">
+
+    <TextView
+        android:id="@+id/title_coffee_app"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:fontFamily="@font/seaweed_script"
+        android:text="Cupffee"
+        android:textSize="64sp"
+        android:textStyle=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/login_mail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="48dp"
         android:text="Email Adresi"
+        android:textColor="#5f3f29"
         android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/title_coffee_app" />
 
     <EditText
         android:id="@+id/login_et_mail"
@@ -33,6 +49,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="Parola"
+        android:textColor="#5f3f29"
+        android:textStyle="bold"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,7 +70,7 @@
         android:id="@+id/btn_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="48dp"
         android:text="Giris Yap"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"

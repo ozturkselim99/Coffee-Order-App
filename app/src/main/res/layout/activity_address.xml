@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    tools:context=".ui.AddressActivity">
+    tools:context=".ui.AddressActivity"
+    android:background="@drawable/cofbg">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_address"

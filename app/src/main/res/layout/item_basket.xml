@@ -51,7 +51,9 @@
             android:layout_width="150dp"
             android:layout_height="60dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:text="Ekstralar: "
+            app:layout_constraintBottom_toTopOf="@id/basket_coffee_price"
             app:layout_constraintEnd_toEndOf="@+id/basket_coffee_size"
             app:layout_constraintStart_toStartOf="@+id/basket_coffee_size"
             app:layout_constraintTop_toBottomOf="@+id/basket_coffee_size" />
@@ -60,13 +62,12 @@
             android:id="@+id/basket_coffee_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:text="00.00"
             android:textSize="16sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/basket_extra"
-            app:layout_constraintStart_toStartOf="@+id/basket_extra"
-            app:layout_constraintTop_toBottomOf="@+id/basket_extra" />
+            app:layout_constraintStart_toStartOf="@+id/basket_extra" />
 
         <ImageView
             android:id="@+id/basket_coffee_delete"

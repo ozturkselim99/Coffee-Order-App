@@ -91,10 +91,10 @@ class CoffeeHomeAdapter(
                 }
                 // Seçimleri Temizleme
                 coffeeSyrup.isChecked = false
+                coffeeCream.isChecked = false
                 coffeeSoft.isChecked = false
                 coffeeAmount.setText("1")
                 coffeeRadioGroup.clearCheck()
-                coffeeSoft.isChecked = false
                 price = coffee.price.toString().toDouble()
 
             }

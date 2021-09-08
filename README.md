@@ -56,3 +56,4 @@ The Observer Design Pattern is a software design pattern in which an object (cal
 
 
 
+

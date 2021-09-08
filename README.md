@@ -38,6 +38,7 @@ The Observer Design Pattern is a software design pattern in which an object (cal
 ## Author
 
 Berkhan Özen
+
 Ahmet Selim Öztürk
 
 Thanks to Yasin Çetin for help this project.

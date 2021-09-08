@@ -13,9 +13,9 @@ You can select coffee size and other coffee extras.
 
 This app made by Android Studio and the language we use is Kotlin.
 
-<a href="https://developer.android.com/studio"> more info about Android Studio </a>
+<a href="https://developer.android.com/studio"> More info about Android Studio </a>
 
-<a href="https://kotlinlang.org/"> more info about Kotlin </a>
+<a href="https://kotlinlang.org/"> More info about Kotlin </a>
 
 ## Architecture
 

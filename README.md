@@ -11,11 +11,13 @@ You can select coffee size and other coffee extras.
 
 ## Technologies
 
-This app made by Android Studio and the language we use is Kotlin.
+This app made by Android Studio and the language we use is Kotlin. For database we use Google Firebase
+
+<a href="https://kotlinlang.org/"> More info about Kotlin </a>
 
 <a href="https://developer.android.com/studio"> More info about Android Studio </a>
 
-<a href="https://kotlinlang.org/"> More info about Kotlin </a>
+<a href="https://firebase.google.com/"> More info about Google Firebase </a>
 
 ## Architecture
 

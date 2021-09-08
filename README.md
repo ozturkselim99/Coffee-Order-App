@@ -31,29 +31,11 @@ The Observer Design Pattern is a software design pattern in which an object (cal
 
 ## Screenshots
 
+<img src="img/login.png" width="190" height="400">   <img src="img/menu.png" width="190" height="400">   <img src="img/cart.png" width="190" height="400">   <img src="img/address.png" width="190" height="400">
 
+## Author
 
+Berkhan Özen
+Ahmet Selim Öztürk
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Thanks to Yasin Çetin for help this project.
